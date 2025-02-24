@@ -4,7 +4,7 @@ import Admin from "../routes/admin/Admin";
 import Blogs from "../routes/Blogs";
 import Blog from "../routes/Blog";
 import Portfolio from "../routes/Portfolio";
-import Contact from "../routes/Contact";
+import Visitor from "../routes/Visitor";
 
 
 interface RouteConfig {
@@ -24,7 +24,7 @@ export const LocalRouteConfig = {
     { path: '/blogs', element: <Blogs /> },
     { path: '/blog/:title', element: <Blog /> },
     { path: '/portfolio', element: <Portfolio /> },
-    { path: '/contact', element: <Contact /> },
+    { path: '/visitor', element: <Visitor /> },
   ],
   protected: [
     { path: "/admin", element: <Admin /> },
