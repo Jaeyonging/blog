@@ -1,5 +1,5 @@
-import { Suspense, useRef } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Suspense, useEffect, useRef, useState } from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
 import { LocalRouteConfig } from "./util/LocalRouteConfig";
 import ProtectedRoute from "./util/ProtectedRoute";
@@ -7,16 +7,25 @@ import GlobalErrorBoundary from "./boundary/GlobalErrorBoundary";
 import Topbar from "./component/Common/Topbar";
 import BottomBar from "./component/Common/BottomBar";
 import ScrollToTop from "./component/Common/ScrollToTop";
+import SideMenu from "./component/Admin/SideMenu";
 
 function App() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const location = useLocation()
+  const [isAdmin, setIsAdmin] = useState(false)
+  useEffect(() => {
+    if (location.pathname.includes('/admin')) {
+      setIsAdmin(true)
+    }
+  }, [location.pathname])
+
   return (
     <>
-      <Topbar scrollContainerRef={scrollContainerRef} />
+      {!isAdmin ? <Topbar scrollContainerRef={scrollContainerRef}/> : <SideMenu />}
       <GlobalErrorBoundary>
         <Suspense fallback={<div>로딩중...</div>}>
           <ScrollToTop scrollContainerRef={scrollContainerRef} />
-          <div ref={scrollContainerRef} className="pt-[60px] overflow-y-auto h-[calc(100vh-60px)] text-white">
+          <div ref={scrollContainerRef} className={`${!isAdmin ? 'pt-[60px] overflow-y-auto h-[calc(100vh-60px)]':'pl-[100px]'} text-white`}>
             <Routes>
               {LocalRouteConfig.public.map((route) => (
                 <Route key={route.path} path={route.path} element={route.element} />
@@ -29,7 +38,7 @@ function App() {
           </div>
         </Suspense>
       </GlobalErrorBoundary>
-      <BottomBar />
+      {!isAdmin && <BottomBar />}
     </>
   );
 }
