@@ -7,15 +7,15 @@ import { FaUser } from "react-icons/fa";
 import { useSearchParams } from 'react-router-dom';
 
 const SideMenu = () => {
-  const [isSelected, setIsSelected] = useState(false)
-  const [selectedTitle, setSelectedTitle] = useState('')
+  const [isSelected, setIsSelected] = useState(true)
+  const [selectedTitle, setSelectedTitle] = useState('Blog')
   const [searchParam, setSearchParam] = useSearchParams()
 
   const handleClick = (title: string) => {
     setIsSelected(true)
     setSelectedTitle(title)
     let param = new URLSearchParams(searchParam)
-    param.set('title', title)
+    param.set('menu', title)
     setSearchParam(param)
   }
   

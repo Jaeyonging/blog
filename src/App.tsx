@@ -12,20 +12,15 @@ import SideMenu from "./component/Admin/SideMenu";
 function App() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const location = useLocation()
-  const [isAdmin, setIsAdmin] = useState(false)
-  useEffect(() => {
-    if (location.pathname.includes('/admin')) {
-      setIsAdmin(true)
-    }
-  }, [location.pathname])
+  const isAdmin = location.pathname.includes('/admin')
 
   return (
     <>
-      {!isAdmin ? <Topbar scrollContainerRef={scrollContainerRef}/> : <SideMenu />}
+      {!isAdmin ? <Topbar scrollContainerRef={scrollContainerRef} /> : <SideMenu />}
       <GlobalErrorBoundary>
         <Suspense fallback={<div>로딩중...</div>}>
           <ScrollToTop scrollContainerRef={scrollContainerRef} />
-          <div ref={scrollContainerRef} className={`${!isAdmin ? 'pt-[60px] overflow-y-auto h-[calc(100vh-60px)]':'pl-[100px]'} text-white`}>
+          <div ref={scrollContainerRef} className={`${!isAdmin ? 'pt-[60px] overflow-y-auto h-[calc(100vh-60px)]' : 'pl-[150px]'} text-white`}>
             <Routes>
               {LocalRouteConfig.public.map((route) => (
                 <Route key={route.path} path={route.path} element={route.element} />
