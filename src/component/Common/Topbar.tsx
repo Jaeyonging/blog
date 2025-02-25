@@ -52,13 +52,13 @@ const Topbar = ({ scrollContainerRef }: { scrollContainerRef: React.RefObject<HT
 
     return (
         <div className={`shadow-lg fixed top-0 left-0 w-full h-[60px] flex items-center justify-between px-4 text-[24px] bg-transparent z-20 transition-opacity duration-300 ease-in-out ${isScrolling ? 'opacity-0' : 'opacity-100'}`}>
-            <div className="absolute top-0 left-0 w-full h-full z-0 pointer-events-none">
+            <div className="absolute top-0 left-0 w-full h-full z-0 pointer-events-none ">
                 <Lottie options={defaultOptions} height={'100%'} width={'100%'} />
             </div>
 
             <div className="flex items-center z-10 w-full justify-between">
                 <GiHamburgerMenu onClick={handleOpen} className="z-30 cursor-pointer text-white" />
-                <img src={'../logo.png'} alt="logo" className="w-[50px] h-[50px]" onClick={() => handleClick('/')} />
+                <img src={'../logo.png'} alt="logo" className="w-[50px] h-[50px] cursor-pointer" onClick={() => handleClick('/')} />
             </div>
 
             <div

@@ -22,7 +22,6 @@ const Write = () => {
     const updatedContent = doc.body.innerHTML;
     console.log('Updated Content:', updatedContent);
     console.log('Files:', files);
-  
     setSummary(updatedContent);
   };
 
@@ -30,21 +29,12 @@ const Write = () => {
     <div className="flex flex-col gap-2 p-2 h-screen">
       <div className="flex items-center justify-center h-[50px]">
         <span className="text-[30px] font-bold">제목:</span>
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          className="w-[50%] border-2 border-gray-300 text-black rounded-md p-2"
-        />
+        <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} className="w-[50%] border-2 border-gray-300 text-black rounded-md p-2" />
       </div>
-
+      <span className="text-[20px] font-bold">태그:</span>
       <div className="flex flex-1 gap-2 overflow-hidden">
         <div className="w-1/2 h-full overflow-auto border border-gray-300 rounded-md">
-          <CustomReactQuill
-            value={summary}
-            onChange={setSummary}
-            setFiles={setFiles}
-          />
+          <CustomReactQuill value={summary} onChange={setSummary} setFiles={setFiles} />
         </div>
 
         <div className="w-1/2 h-full overflow-auto border border-gray-300 rounded-md">
@@ -52,12 +42,7 @@ const Write = () => {
         </div>
       </div>
 
-      <button
-        className="bg-cardcolor text-white rounded-md p-2 border-[1px] h-[50px] border-gray-300"
-        onClick={handleSaveButton}
-      >
-        파일 확인
-      </button>
+      <button className="bg-cardcolor text-white rounded-md p-2 border-[1px] h-[50px] border-gray-300" onClick={handleSaveButton}>파일 확인</button>
     </div>
   );
 };
