@@ -1,12 +1,12 @@
 import React from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
-import { ErrorFallback } from './ErrorFallback';
+import { GlobalErrorFallback } from './GlobalErrorFallback';
 
 const GlobalErrorBoundary: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
     return (
         <ErrorBoundary
-            FallbackComponent={ErrorFallback}
+            FallbackComponent={GlobalErrorFallback}
             onReset={() => {
 
             }}

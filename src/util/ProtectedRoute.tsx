@@ -2,45 +2,33 @@ import { useEffect, useState } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 
 import { getCookie } from './cookies';
-import { checkToken } from '../api/login';
 import Loading from '../lotties/Loading';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/configureStore';
+import { useQuery } from 'react-query';
+import { checkMaster } from '../api/login';
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
 }
 
 const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
-  const [isTokenValid, setIsTokenValid] = useState<boolean | null>(null);
-  const token = getCookie('token');
-  const isOnboard = getCookie('onboard')
-  const hostname = window.location.hostname;
-
-  useEffect(() => {
-    // const validateToken = async () => {
-    //   try {
-    //     let data = await checkToken(token);
-    //     setIsTokenValid(true);
-    //   } catch (error) {
-    //     setIsTokenValid(false);
-    //   }
-    // };
-
-    if (token) {
-      // validateToken();
-      setIsTokenValid(true);
-    } else {
-      setIsTokenValid(false);
+  const id = useSelector((state: RootState) => state.user.uid) || '-1';
+  const {data, isLoading, isError, error} = useQuery(
+    ['checkMaster', id],
+    () => checkMaster(id),
+    {
+      enabled: !!id,
     }
-  }, [token]);
+  )
 
-  // if (isTokenValid === null) {
-  //   return <Loading/>;
-  // }
-  // if (!isTokenValid) {
-  //   return <Navigate to="/" replace />;
-  // }
+  if(isLoading) return <Loading/>
+  if(isError) throw error;
 
-  return <>{children}</>;
+  if(data.result){
+    return <>{children}</>;
+  }
+  return <Navigate to="/" replace />;
 };
 
 export default ProtectedRoute;

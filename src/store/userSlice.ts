@@ -3,17 +3,15 @@ import { configureStore, createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 const user = createSlice({
     name: 'user',
-    initialState: {name: 'kim', age: 20},
+    initialState: {uid: ''},
     reducers: {
-        changeName(state) {
-            state.name = "park"
-        },
-        increaeAge(state, age:PayloadAction<number>){
-            state.age +=  age.payload
+        changeUID(state, uid:PayloadAction<string>) {
+            state.uid = ''
+            state.uid = uid.payload
         },
     }
 })
 
-export const { changeName, increaeAge} = user.actions;
+export const { changeUID} = user.actions;
 
 export default user

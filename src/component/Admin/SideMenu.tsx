@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import SideCard from './SideCard'
-import { FaHome } from "react-icons/fa";
 import { GoProjectRoadmap } from "react-icons/go";
 import { FaPencilAlt } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
 import { useSearchParams } from 'react-router-dom';
+import { FaCode } from "react-icons/fa";
+
 
 const SideMenu = () => {
   const [isSelected, setIsSelected] = useState(true)
@@ -24,6 +25,7 @@ const SideMenu = () => {
       <SideCard title='Blog' icon={<FaPencilAlt />} isSelected={isSelected && selectedTitle === 'Blog'} onClick={()=>handleClick('Blog')} />
       <SideCard title='Portfolio' icon={<GoProjectRoadmap />} isSelected={isSelected && selectedTitle === 'Portfolio'} onClick={()=>handleClick('Portfolio')} />
       <SideCard title='Visitor' icon={<FaUser />} isSelected={isSelected && selectedTitle === 'Visitor'} onClick={()=>handleClick('Visitor')} />
+      <SideCard title='Code' icon={<FaCode />} isSelected={isSelected && selectedTitle === 'Code'} onClick={()=>handleClick('Code')} />
     </div>
   )
 }
