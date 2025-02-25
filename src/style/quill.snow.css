@@ -41,7 +41,7 @@
   text-align: left;
   white-space: pre-wrap;
   word-wrap: break-word;
-  min-height: 50vh;
+  min-height: 80vh;
 }
 .ql-editor > * {
   cursor: text;
