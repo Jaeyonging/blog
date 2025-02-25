@@ -1,14 +1,21 @@
+import { useQuery } from 'react-query';
 import CategoryCard from './CategoryCard';
+import { getCodeByTag } from '../../api/code';
+import Loading from '../../lotties/Loading';
 
 const Categories = () => {
-  const categories = ['React', 'JavaScript', 'CSS', 'Node.js', 'TypeScript', 'Python', 'GraphQL'];
+  const { data, isLoading, isError, error } = useQuery(['getCodeByTag'], () => getCodeByTag('HASH'));
+  if (isLoading) return <Loading />;
+  if (isError) throw error;
 
+
+  console.log(data)
   return (
     <div className='flex flex-col gap-2'>
       <span className='text-[20px] font-bold'>카테고리</span>
       <div className='flex overflow-x-auto gap-2'>
-        {categories.map((category, index) => (
-          <CategoryCard key={index} title={category} />
+        {data.results.map((hash: any, index: any) => (
+          <CategoryCard key={index} title={hash.name} />
         ))}
       </div>
     </div>

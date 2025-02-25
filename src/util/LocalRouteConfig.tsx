@@ -1,11 +1,14 @@
 import { lazy, Suspense } from "react";
 import Home from "../routes/Home";
-import Admin from "../routes/admin/Admin";
 import Blogs from "../routes/Blogs";
 import Blog from "../routes/Blog";
 import Portfolio from "../routes/Portfolio";
 import Visitor from "../routes/Visitor";
 import Write from "../routes/admin/Write";
+import AdminBlog from "../routes/admin/AdminBlog";
+import AdminPortfolio from "../routes/admin/AdminPortfolio";
+import AdminVisitor from "../routes/admin/AdminVisitor";
+import AdminCode from "../routes/admin/AdminCode";
 
 
 interface RouteConfig {
@@ -28,7 +31,11 @@ export const LocalRouteConfig = {
     { path: '/visitor', element: <Visitor /> },
   ],
   protected: [
-    { path: "/admin", element: <Admin /> },
+    { path: "/admin", element: <AdminBlog /> },
+    { path: "/admin/blog", element: <AdminBlog /> },
+    { path: "/admin/portfolio", element: <AdminPortfolio /> },
+    { path: "/admin/visitor", element: <AdminVisitor /> },
+    { path: "/admin/code", element: <AdminCode /> },
     { path: "/admin/write", element: <Write /> },
   ],
 

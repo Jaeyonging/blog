@@ -17,7 +17,7 @@ const FilterCard = ({ title, keyword }: Props) => {
         setSearchParams(searchParams)
     }
     return (
-        <div className={`bg-cardcolor rounded-[10px] px-3 py-1 ${selectedFilter === keyword ? 'bg-cyan-500 text-white' : ''}`} onClick={handleFilter}>
+        <div className={`bg-cardcolor rounded-[10px] px-3 py-1 cursor-pointer ${selectedFilter === keyword ? 'bg-cyan-500 text-white' : ''}`} onClick={handleFilter}>
             <span>{title}</span>
         </div>
     )

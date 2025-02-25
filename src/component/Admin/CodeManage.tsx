@@ -1,12 +1,40 @@
-import React from 'react'
+import React, { useState, useMemo } from 'react';
+import CodePopup from '../Popup/CodePopup';
+import { useQuery } from 'react-query';
+import { getCode } from '../../api/code';
+import Loading from '../../lotties/Loading';
+import CodeCard from './CodeCard';
 
 const CodeManage = () => {
-  return (
-    <div className='flex flex-col p-2'>
-        <span>코드 관리</span>
-        <button className='border-[1px] rounded-[10px] gap-2'>코드 추가</button>
-    </div>
-  )
-}
+  const [isPopupOpen, setPopupOpen] = useState(false);
+  const handlePopup = () => {
+    setPopupOpen(!isPopupOpen);
+  };
 
-export default CodeManage
+  const { data, isLoading, isError, error } = useQuery(['getCode'], getCode);
+  if (isLoading) return <Loading />;
+  if (isError) throw error;
+
+  const groupedData = data.results.reduce((acc: any, item: any) => {
+    if (!acc[item.tag]) {
+      acc[item.tag] = [];
+    }
+    acc[item.tag].push(item);
+    return acc;
+  }, {});
+  
+  return (
+    <>
+      <div className='flex flex-col p-2'>
+        <button className='border-[1px] rounded-[10px] gap-2 cursor-pointer py-3 w-[80%] ml-[10%] hover:bg-gray-200 hover:text-black' onClick={handlePopup}>코드 추가</button>
+        {Object.keys(groupedData).map((tag) => (
+          <CodeCard key={tag} groupedData={groupedData} tag={tag} />
+        ))}
+      </div>
+
+      <CodePopup isOpen={isPopupOpen} onClose={handlePopup} />
+    </>
+  );
+};
+
+export default CodeManage;

@@ -15,8 +15,6 @@ const BlogManage = () => {
       <BlogCard title="오늘은 블로asdfasdfasdfasdfasfdsadfsadf그다!" description="블로그에 관한 글을asasdfasdfasdfadfasdfsadfasdfasdfasdfsadf 쓰는 날이다." date="2025-03-02" image="https://picsum.photos/200/150" width="100%" mode={'list'} category={['REACT', 'NEXTJS']} />
       <BlogCard title="오늘은 블로asdfasdfasdfasdfasfdsadfsadf그다!" description="블로그에 관한 글을asasdfasdfasdfadfasdfsadfasdfasdfasdfsadf 쓰는 날이다." date="2025-03-02" image="https://picsum.photos/200/150" width="100%" mode={'list'} category={['REACT', 'NEXTJS']} />
       <BlogCard title="오늘은 블로asdfasdfasdfasdfasfdsadfsadf그다!" description="블로그에 관한 글을asasdfasdfasdfadfasdfsadfasdfasdfasdfsadf 쓰는 날이다." date="2025-03-02" image="https://picsum.photos/200/150" width="100%" mode={'list'} category={['REACT', 'NEXTJS']} />
-
-
     </div>
   )
 }
