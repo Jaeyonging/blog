@@ -64,3 +64,9 @@ body {
 .font-bold {
   font-family: "Galmuri11-Bold" !important;
 }
+
+.ql-syntax {
+  background-color: #23241f;
+  color: #f8f8f2;
+  overflow: visible;
+}

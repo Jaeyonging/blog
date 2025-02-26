@@ -12,7 +12,7 @@ interface Props {
   value: string;
   onChange: (value: string) => void;
   className?: string;
-  setFiles: React.Dispatch<React.SetStateAction<File[]>>;  // 🔥 setFiles prop 추가
+  setFiles: React.Dispatch<React.SetStateAction<File[]>>;
 }
 
 const CustomReactQuill = forwardRef(({ value, onChange, className, setFiles }: Props, ref) => {
@@ -24,13 +24,14 @@ const CustomReactQuill = forwardRef(({ value, onChange, className, setFiles }: P
     [{ color: [] }, { background: [] }],
     [{ align: [] }],
     [{ list: 'ordered' }, { list: 'bullet' }],
+    ['code-block'],
     ['image'],
   ];
 
   const formats = [
     'size', 'bold', 'italic', 'underline', 'strike',
     'color', 'background', 'align',
-    'list', 'bullet', 'link', 'code-block',
+    'list', 'bullet', 'link', 'code-block', 
     'blockquote', 'script', 'indent', 'direction',
     'table', 'video', 'formula', 'image'
   ];
