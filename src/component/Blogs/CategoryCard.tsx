@@ -38,14 +38,10 @@ const CategoryCard = ({ title }: Props) => {
   };
 
   return (
-    <div
-      onClick={handleClick}
-      className={`rounded-[10px] px-3 py-1 cursor-pointer transition-colors duration-300 ${
-        isSelected ? 'bg-cyan-500 text-white' : `${randomColor.text}`
-      }`}
-    >
+    <div onClick={handleClick} className={`rounded-[10px] flex items-center px-3 py-1 cursor-pointer transition-colors duration-300 whitespace-nowrap min-w-max ${isSelected ? 'bg-cyan-500 text-white' : `${randomColor.text}`}`}>
       <span>{title}</span>
     </div>
+
   );
 };
 

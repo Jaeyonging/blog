@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react';
+import React, { forwardRef, useMemo, useRef } from 'react';
 import ReactQuill, { Quill } from 'react-quill';
 import '../../style/quill.snow.css';
 import ImageResize from 'quill-resize-image';
@@ -15,7 +15,7 @@ interface Props {
   setFiles: React.Dispatch<React.SetStateAction<File[]>>;  // 🔥 setFiles prop 추가
 }
 
-const CustomReactQuill = ({ value, onChange, className, setFiles }: Props) => {
+const CustomReactQuill = forwardRef(({ value, onChange, className, setFiles }: Props, ref) => {
   const quillRef = useRef<ReactQuill | null>(null);
 
   const toolbarOptions = [
@@ -87,6 +87,6 @@ const CustomReactQuill = ({ value, onChange, className, setFiles }: Props) => {
       />
     </div>
   );
-};
+});
 
 export default CustomReactQuill;

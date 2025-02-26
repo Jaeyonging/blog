@@ -26,7 +26,7 @@ export const LocalRouteConfig = {
   public: [
     { path: "/", element: <Home /> },
     { path: '/blogs', element: <Blogs /> },
-    { path: '/blog/:title', element: <Blog /> },
+    { path: '/blog/:bid', element: <Blog /> },
     { path: '/portfolio', element: <Portfolio /> },
     { path: '/visitor', element: <Visitor /> },
   ],
