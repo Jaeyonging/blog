@@ -1,4 +1,3 @@
-import React from "react";
 import { IoIosRefresh } from "react-icons/io";
 
 export const ApiErrorFallback = ({ error, resetErrorBoundary }: { error: Error; resetErrorBoundary: () => void; }) => {
