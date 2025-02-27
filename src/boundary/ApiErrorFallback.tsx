@@ -4,7 +4,7 @@ export const ApiErrorFallback = ({ error, resetErrorBoundary }: { error: Error; 
   const statusCode = (error as any)?.response?.status || null;
   console.log(error)
   return (
-    <div role="alert" className="flex flex-col items-center justify-center w-[100vw] h-[100vh]">
+    <div role="alert" className="flex flex-col items-center justify-center w-[100vw] h-[100%]">
       <span>{error.message}</span>
       <span>{statusCode}</span>
       <span className="text-[24px]">에러가 발생하였습니다.</span>

@@ -2,10 +2,10 @@ import { useState } from 'react';
 import CustomReactQuill from '../../component/Admin/CustomReactQuill';
 import PreviewSide from '../../component/Admin/PreviewSide';
 import '../../style/quill.snow.css';
-import InputTag from '../../component/Admin/InputTag';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/configureStore';
 import { writeBlogs } from '../../api/board';
+import CustomInputTag from '../../component/Admin/CustomInputTag';
 
 const Write = () => {
   const userid = useSelector((state: RootState) => state.user.uid);
@@ -13,6 +13,7 @@ const Write = () => {
   const [title, setTitle] = useState('');
   const [files, setFiles] = useState<File[]>([]);
   const [tags, setTags] = useState<string[]>([]);
+  const [descr, setDescr] = useState('')
 
   const handleRemoveTag = (index: number) => {
     setTags(tags.filter((_, i) => i !== index));
@@ -31,12 +32,8 @@ const Write = () => {
 
     const updatedContent = doc.body.innerHTML;
     setSummary(updatedContent);
-    console.log('Updated Content:', updatedContent);
-    console.log('Files:', files);
-    console.log('Tags:', tags);
-    console.log('Userid:', userid);
 
-    writeBlogs(userid, title, tags, updatedContent, files).then((res) => {
+    writeBlogs(userid, title, descr, tags, updatedContent, files).then((res) => {
       console.log(res)
     });
     
@@ -48,8 +45,12 @@ const Write = () => {
         <span className="text-[30px] font-bold">제목:</span>
         <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} className="w-[50%] border-2 border-gray-300 text-black rounded-md p-2" />
       </div>
+      <div className="flex items-center justify-center h-[50px]">
+        <span className="text-[30px] font-bold">설명:</span>
+        <input type="text" value={descr} onChange={(e) => setDescr(e.target.value)} className="w-[50%] border-2 border-gray-300 text-black rounded-md p-2" />
+      </div>
 
-      <InputTag tags={tags} setTags={setTags} />
+      <CustomInputTag tags={tags} setTags={setTags} />
 
       <div className="flex gap-2 flex-wrap">
         {tags.map((tag, index) => (

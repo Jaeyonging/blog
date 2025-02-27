@@ -7,7 +7,7 @@ interface Props {
 
 const CategoryCard = ({ title }: Props) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const selectedCategory = searchParams.get('category');
+  const selectedCategory = searchParams.get('tag');
 
   // 다크 테마에 어울리는 텍스트 색상
   const colorPairs = [
@@ -30,9 +30,9 @@ const CategoryCard = ({ title }: Props) => {
 
   const handleClick = () => {
     if (isSelected) {
-      searchParams.delete('category');
+      searchParams.delete('tag');
     } else {
-      searchParams.set('category', title);
+      searchParams.set('tag', title);
     }
     setSearchParams(searchParams);
   };

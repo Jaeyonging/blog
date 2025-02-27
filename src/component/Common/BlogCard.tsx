@@ -4,6 +4,7 @@ import { AiFillLike } from "react-icons/ai";
 import { FaComment } from "react-icons/fa";
 
 interface Props {
+    id: number;
     title: string;
     description: string;
     date: string;
@@ -16,10 +17,10 @@ interface Props {
     comment?: number;
 }
 
-const BlogCard = ({ title, description, date, image, width, height, mode = 'card', category, like = 0, comment = 0 }: Props) => {
+const BlogCard = ({ id, title, description, date, image, width, height, mode = 'card', category, like = 0, comment = 0 }: Props) => {
     const navigate = useNavigate();
     const handleClick = () => {
-        navigate(`/blog/${encodeURIComponent(title)}`);
+        navigate(`/blog/${id}`);
     }
 
     return (

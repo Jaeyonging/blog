@@ -5,7 +5,7 @@ interface Props{
     setTags: (tags: string[]) => void
 }
 
-const InputTag = ({tags, setTags}: Props) => {
+const CustomInputTag = ({tags, setTags}: Props) => {
     const [tagInput, setTagInput] = useState<string>('');
 
     const handleTagInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,4 +36,4 @@ const InputTag = ({tags, setTags}: Props) => {
     )
 }
 
-export default InputTag
+export default CustomInputTag

@@ -8,8 +8,6 @@ const Categories = () => {
   if (isLoading) return <Loading />;
   if (isError) throw error;
 
-
-  console.log(data)
   return (
     <div className='flex flex-col gap-2'>
       <span className='text-[20px] font-bold'>카테고리</span>

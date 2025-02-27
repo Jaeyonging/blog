@@ -13,6 +13,7 @@ import Loading from "./lotties/Loading";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./store/configureStore";
 import { changeUID } from "./store/userSlice";
+import SplashLoading from "./lotties/SplashLoading";
 
 function App() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -40,12 +41,12 @@ function App() {
     }
   );
 
-  if (isIPLoading || isCheckLoading) return <Loading />;
+  if (isIPLoading || isCheckLoading) return <SplashLoading />;
 
   return (
     <>
       {!isAdmin ? <Topbar scrollContainerRef={scrollContainerRef} /> : <SideMenu />}
-        <Suspense fallback={<Loading />}>
+        <Suspense fallback={<SplashLoading />}>
           <ScrollToTop scrollContainerRef={scrollContainerRef} />
           <div ref={scrollContainerRef} className={`${!isAdmin ? 'pt-[60px] overflow-y-auto h-[calc(100vh-60px)]' : 'pl-[150px]'} text-white`}>
             <Routes>

@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 
 import { getCookie } from './cookies';
-import Loading from '../lotties/Loading';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/configureStore';
 import { useQuery } from 'react-query';
 import { checkMaster } from '../api/login';
+import SplashLoading from '../lotties/SplashLoading';
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -22,7 +22,7 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
     }
   )
 
-  if(isLoading) return <Loading/>
+  if(isLoading) return <SplashLoading/>
   if(isError) throw error;
 
   if(data.result){

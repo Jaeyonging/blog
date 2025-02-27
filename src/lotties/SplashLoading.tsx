@@ -1,5 +1,5 @@
 import React from 'react'
-import animationData from '../../lotties/splash.json'
+import animationData from './splash.json'
 import Lottie from 'react-lottie';
 
 const SplashLoading = () => {
