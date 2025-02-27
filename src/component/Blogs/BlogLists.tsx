@@ -76,6 +76,7 @@ const BlogLists = () => {
                     width="100%"
                     mode={selectedMode}
                     category={blog.tags}
+                    view = {blog.view}
                     like={blog.like_count}
                     comment={blog.comment_count}
                 />

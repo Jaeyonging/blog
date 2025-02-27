@@ -2,13 +2,14 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AiFillLike } from "react-icons/ai";
 import { FaComment } from "react-icons/fa";
-
+import { MdOutlineVisibility } from "react-icons/md";
 interface Props {
     id: number;
     title: string;
     description: string;
     date: string;
     image: string;
+    view: number;
     width?: string;
     height?: string;
     mode?: string;
@@ -17,7 +18,7 @@ interface Props {
     comment?: number;
 }
 
-const BlogCard = ({ id, title, description, date, image, width, height, mode = 'card', category, like = 0, comment = 0 }: Props) => {
+const BlogCard = ({ id, title, description, date, image, width, height, mode = 'card', category, view, like = 0, comment = 0 }: Props) => {
     const navigate = useNavigate();
     const handleClick = () => {
         navigate(`/blog/${id}`);
@@ -41,6 +42,7 @@ const BlogCard = ({ id, title, description, date, image, width, height, mode = '
                 <div className='flex justify-between'>
                     <span className='text-[12px] text-gray-400'>{date}</span>
                     <div className='flex gap-2 text-[13px] text-gray-400 items-center'>
+                        <MdOutlineVisibility /><span>{view}</span>
                         <AiFillLike /><span>{like}</span>
                         <FaComment /><span>{comment}</span>
                     </div>

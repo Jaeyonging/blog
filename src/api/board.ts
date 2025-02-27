@@ -29,3 +29,8 @@ export const getBlogs = async()=>{
     const response = await axios.get(`${API_URL}/getBlogs`);
     return response.data;
 }
+
+export const viewBlog = async(bid: string)=>{
+    const response = await axios.post(`${API_URL}/viewBlog`, {bid});
+    return response.data;
+}
