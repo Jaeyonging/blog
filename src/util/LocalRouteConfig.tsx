@@ -9,6 +9,7 @@ import AdminBlog from "../routes/admin/AdminBlog";
 import AdminPortfolio from "../routes/admin/AdminPortfolio";
 import AdminVisitor from "../routes/admin/AdminVisitor";
 import AdminCode from "../routes/admin/AdminCode";
+import AdminDb from "../routes/admin/AdminDb";
 
 
 interface RouteConfig {
@@ -28,6 +29,7 @@ export const LocalRouteConfig = {
     { path: "/admin", element: <AdminBlog /> },
     { path: "/admin/blog", element: <AdminBlog /> },
     { path: "/admin/portfolio", element: <AdminPortfolio /> },
+    { path: "/admin/db", element: <AdminDb /> },
     { path: "/admin/visitor", element: <AdminVisitor /> },
     { path: "/admin/code", element: <AdminCode /> },
     { path: "/admin/write", element: <Write /> },

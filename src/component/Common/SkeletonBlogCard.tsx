@@ -1,8 +1,13 @@
 import React from 'react';
 
-const SkeletonBlogCard = () => {
+interface Props{
+  width?: string;
+  height?: string;
+}
+
+const SkeletonBlogCard = ({ width = '250px', height = '280px' }: Props) => {
   return (
-    <div className="skeleton-card flex flex-col min-w-[250px] min-h-[280px] w-[250px] h-[280px] p-3 shadow-lg hover:shadow-xl transition-shadow duration-300">
+    <div className="skeleton-card flex flex-col min-w-[250px] min-h-[280px] w-[250px] h-[280px] p-3 shadow-lg hover:shadow-xl transition-shadow duration-300" style={{ width: width, height: height }}>
       <div className="skeleton-shimmer"></div>
 
       <div className='flex w-full h-[150px] bg-gray-700 border-2 border-[#ffffff33] rounded-md overflow-hidden'></div>

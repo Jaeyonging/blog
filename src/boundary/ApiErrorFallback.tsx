@@ -2,7 +2,11 @@ import { IoIosRefresh } from "react-icons/io";
 
 export const ApiErrorFallback = ({ error, resetErrorBoundary }: { error: Error; resetErrorBoundary: () => void; }) => {
   const statusCode = (error as any)?.response?.status || null;
-  console.log(error)
+  console.log(error.message)
+  if(error.message === 'Network Error') {
+    throw error
+  }
+
   return (
     <div role="alert" className="flex flex-col items-center justify-center w-[100%] h-[100%]">
       <span>{error.message}</span>

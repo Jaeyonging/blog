@@ -5,6 +5,7 @@ import Loading from '../../lotties/Loading';
 
 const Categories = () => {
   const { data, isLoading, isError, error } = useQuery(['getCodeByTag'], () => getCodeByTag('HASH'));
+  
   if (isLoading) return <Loading />;
   if (isError) throw error;
 

@@ -4,7 +4,7 @@ import { GoProjectRoadmap } from "react-icons/go";
 import { FaPencilAlt } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { FaCode } from "react-icons/fa";
+import { FaCode, FaDatabase } from "react-icons/fa";
 
 
 const SideMenu = () => {
@@ -25,6 +25,7 @@ const SideMenu = () => {
       <SideCard title='Portfolio' icon={<GoProjectRoadmap />} isSelected={isSelected && selectedTitle === 'portfolio'} onClick={()=>handleClick('portfolio')} />
       <SideCard title='Visitor' icon={<FaUser />} isSelected={isSelected && selectedTitle === 'visitor'} onClick={()=>handleClick('visitor')} />
       <SideCard title='Code' icon={<FaCode />} isSelected={isSelected && selectedTitle === 'code'} onClick={()=>handleClick('code')} />
+      <SideCard title='DB' icon={<FaDatabase />} isSelected={isSelected && selectedTitle === 'db'} onClick={()=>handleClick('db')} />
     </div>
   )
 }

@@ -9,8 +9,6 @@ const Blogs = () => {
       <Filters />
       <ApiErrorBoundary>
         <Categories />
-      </ApiErrorBoundary>
-      <ApiErrorBoundary>
         <BlogLists />
       </ApiErrorBoundary>
     </div>

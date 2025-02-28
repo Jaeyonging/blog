@@ -6,6 +6,7 @@ import { useSearchParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { getBlogs } from '../../api/board';
 import Loading from '../../lotties/Loading';
+import SkeletonBlogCard from '../Common/SkeletonBlogCard';
 
 const BlogLists = () => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -19,28 +20,28 @@ const BlogLists = () => {
         setSearchParams(newParams);
     }
 
-    const { data, isLoading, isError, error } = useQuery(['getBlogs'], () => getBlogs(filter,tag), {
+    const { data, isLoading, isError, error } = useQuery(['getBlogs', filter, tag], () => getBlogs(filter, tag), {
         onSuccess: (data) => {
             console.log("Fetched data:", data);
         }
     });
 
-    if (isLoading) return <Loading />;
+    // if (isLoading) return <Loading />;
     if (isError) throw error;
 
     console.log(data)
 
     const filteredAndSortedData = (() => {
         if (!Array.isArray(data)) return [];
-    
+
         let filteredData = [...data];
-    
+
         if (tag !== 'all') {
-            filteredData = filteredData.filter((blog) => 
+            filteredData = filteredData.filter((blog) =>
                 Array.isArray(blog.tags) && blog.tags.includes(tag)
             );
         }
-    
+
         switch (filter) {
             case 'top':
                 filteredData.sort((a, b) => (b.likes || 0) - (a.likes || 0));
@@ -50,15 +51,15 @@ const BlogLists = () => {
                 break;
             case 'recent':
             default:
-                filteredData.sort((a, b) => 
+                filteredData.sort((a, b) =>
                     new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
                 );
                 break;
         }
-    
+
         return filteredData;
     })();
-    
+
 
     return (
         <div className='flex flex-col gap-2'>
@@ -67,14 +68,29 @@ const BlogLists = () => {
                 <BsList className={`cursor-pointer ${selectedMode === 'list' ? 'text-white' : 'text-gray-400'}`} onClick={() => handleModeChange('list')} />
             </div>
 
-            {filteredAndSortedData.length > 0 && filteredAndSortedData.map((blog: any) => (
-                <BlogCard
-                    key={blog.id}
-                    blogData={blog}
-                    mode={selectedMode}
-                    width="100%"
-                />
-            ))}
+            {isLoading ? (
+                <div className='flex flex-col flex-wrap gap-2 lg:flex-row items-center'>
+                    {Array.from({ length: 5 }).map((_, index) => (
+                        <div className='w-full lg:w-[250px]'>
+                            <SkeletonBlogCard key={index} width='100%' height='280px' />
+                        </div>
+                    ))}
+                </div>
+            )
+                : (
+                    <div className='flex flex-col flex-wrap gap-2 lg:flex-row justify-evenly'>
+                        {filteredAndSortedData.length > 0 && filteredAndSortedData.map((blog: any) => (
+                            <div className='w-full lg:w-[250px]'>
+                                <BlogCard
+                                    key={blog.id}
+                                    blogData={blog}
+                                    mode={selectedMode}
+                                    width="100%"
+                                />
+                            </div>
+                        ))}
+                    </div>
+                )}
         </div>
     );
 };
