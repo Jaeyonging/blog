@@ -19,7 +19,7 @@ const BlogLists = () => {
         setSearchParams(newParams);
     }
 
-    const { data, isLoading, isError, error } = useQuery(['getBlogs'], getBlogs, {
+    const { data, isLoading, isError, error } = useQuery(['getBlogs'], () => getBlogs(filter,tag), {
         onSuccess: (data) => {
             console.log("Fetched data:", data);
         }
@@ -27,6 +27,8 @@ const BlogLists = () => {
 
     if (isLoading) return <Loading />;
     if (isError) throw error;
+
+    console.log(data)
 
     const filteredAndSortedData = (() => {
         if (!Array.isArray(data)) return [];
@@ -41,7 +43,7 @@ const BlogLists = () => {
     
         switch (filter) {
             case 'top':
-                filteredData.sort((a, b) => (b.like_count || 0) - (a.like_count || 0));
+                filteredData.sort((a, b) => (b.likes || 0) - (a.likes || 0));
                 break;
             case 'hot':
                 filteredData.sort((a, b) => (b.comment_count || 0) - (a.comment_count || 0));
@@ -72,12 +74,12 @@ const BlogLists = () => {
                     title={blog.title}
                     description={blog.descr}
                     date={blog.created_at}
-                    image={"https://picsum.photos/200/150"}
+                    image={blog.files[0].path}
                     width="100%"
                     mode={selectedMode}
                     category={blog.tags}
                     view = {blog.view}
-                    like={blog.like_count}
+                    like={blog.likes}
                     comment={blog.comment_count}
                 />
             ))}

@@ -2,19 +2,22 @@ import React, { useState, useEffect } from 'react';
 import BlogCard from '../Common/BlogCard';
 import { useNavigate } from 'react-router-dom';
 import SkeletonBlogCard from '../Common/SkeletonBlogCard';
+import { useQuery } from 'react-query';
+import { getBlogs } from '../../api/board';
+import Loading from '../../lotties/Loading';
 
 const TopBlogs = () => {
     const navigate = useNavigate();
-    const [isLoading, setIsLoading] = useState(true);
     const blognumber = 5;
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setIsLoading(false);
-        }, 2000);
+    const { data, isLoading, isError, error } = useQuery(['getBlogs','top','all'], () => getBlogs('top', 'all'), {
+        onSuccess: (data) => {
+            console.log("Fetched data:", data);
+        }
+    });
 
-        return () => clearTimeout(timer);
-    }, []);
+    // if (isLoading) return <Loading />;
+    if (isError) throw error;
 
     return (
         <div>
@@ -31,13 +34,9 @@ const TopBlogs = () => {
                         <SkeletonBlogCard key={index} />
                     ))
                 ) : (
-                    <>
-                        <BlogCard title="오늘은 블로그다!" description="블로그에 관한 글을 쓰는 날이다." date="2025-03-02" image="https://picsum.photos/200/150" />
-                        <BlogCard title="서버로 가능하겟어?" description="서버에 관한 글을 쓰는 날이다." date="2025-03-02" image="https://picsum.photos/200/300" />
-                        <BlogCard title="프론트로 가능하겟어?" description="프론트에 관한 글을 쓰는 날이다." date="2025-03-02" image="https://picsum.photos/200/300" />
-                        <BlogCard title="백엔드로 가능하겟어?" description="백엔드에 관한 글을 쓰는 날이다." date="2025-03-02" image="https://picsum.photos/200/300" />
-                        <BlogCard title="백엔드로 가능하겟어?" description="백엔드에 관한 글을 쓰는 날이다." date="2025-03-02" image="https://picsum.photos/200/300" />
-                    </>
+                    data.map((blog:any) => (
+                        <BlogCard key={blog.id} id={blog.id} title={blog.title} description={blog.descr} date={blog.created_at} image={blog.files[0].path} view={blog.view} like={blog.likes} comment={blog.comment_count} />
+                    ))
                 )}
             </div>
         </div>

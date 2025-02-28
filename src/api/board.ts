@@ -25,12 +25,22 @@ export const getBoardById = async (bid: string) => {
     return response.data;
 }
 
-export const getBlogs = async()=>{
-    const response = await axios.get(`${API_URL}/getBlogs`);
+export const getBlogs = async(filter: string, tag: string)=>{
+    const response = await axios.post(`${API_URL}/getBlogs`, {filter, tag});
     return response.data;
 }
 
 export const viewBlog = async(bid: string)=>{
     const response = await axios.post(`${API_URL}/viewBlog`, {bid});
+    return response.data;
+}
+
+export const addLike = async(bid: string, uid: string)=>{
+    const response = await axios.post(`${API_URL}/addLike`, {bid, uid});
+    return response.data;
+}
+
+export const addComment = async(bid: string, content: string, uid: string)=>{
+    const response = await axios.post(`${API_URL}/addComment`, {bid, content, uid});
     return response.data;
 }
