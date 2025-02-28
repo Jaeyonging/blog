@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./store/configureStore";
 import { changeUID } from "./store/userSlice";
 import SplashLoading from "./lotties/SplashLoading";
+import AnimatedRoutes from "./util/AnimatedRoutes";
 
 function App() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -49,15 +50,7 @@ function App() {
         <Suspense fallback={<SplashLoading />}>
           <ScrollToTop scrollContainerRef={scrollContainerRef} />
           <div ref={scrollContainerRef} className={`${!isAdmin ? 'pt-[60px] overflow-y-auto h-[calc(100vh-60px)]' : 'pl-[150px]'} text-white`}>
-            <Routes>
-              {LocalRouteConfig.public.map((route) => (
-                <Route key={route.path} path={route.path} element={route.element} />
-              ))}
-
-              {LocalRouteConfig.protected.map((route) => (
-                <Route key={route.path} path={route.path} element={<ProtectedRoute>{route.element}</ProtectedRoute>} />
-              ))}
-            </Routes>
+            <AnimatedRoutes />
           </div>
         </Suspense>
       {!isAdmin && <BottomBar />}

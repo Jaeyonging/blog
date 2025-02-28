@@ -7,7 +7,7 @@ interface Props{
 
 const ContentBody = ({content}: Props) => {
     return (
-        <div className='min-h-[70vh]'>
+        <div className='min-h-[70vh] p-2'>
             <div dangerouslySetInnerHTML={{ __html: decodeEntities(content) }} />
         </div>
     )

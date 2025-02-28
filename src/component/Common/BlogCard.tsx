@@ -41,9 +41,11 @@ const BlogCard = ({ blogData, mode = 'card', width, height }: Props) => {
                         <span className='text-[12px] text-gray-300 truncate'>설명이 없습니다.</span>
                     )
                 }
-                <div className='flex gap-2 min-h-[20px]'>
-                    {blogData.tags && blogData.tags.map((item: any, index: any) => (
-                        <span key={index} className='text-[12px] text-gray-300 truncate bg-[#ffffff33] px-2 py-1 rounded-md'>{item}</span>
+                <div className="flex gap-2 min-h-[20px] max-w-full overflow-x-auto whitespace-nowrap scrollbar-hide">
+                    {blogData.tags && blogData.tags.map((item: any, index: number) => (
+                        <span key={index} className='text-[12px] text-gray-300 bg-[#ffffff33] px-2 py-1 rounded-md'>
+                            {item}
+                        </span>
                     ))}
                 </div>
                 <div className='flex justify-between'>

@@ -9,11 +9,14 @@ const ScrollToTop = ({ scrollContainerRef }: ScrollToTopProps) => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollTo({
-        top: 0,
-      });
-    }
+    setTimeout(() => {
+      if (scrollContainerRef.current) {
+        scrollContainerRef.current.scrollTo({
+          top: 0,
+        });
+      }
+    }, 300);
+
   }, [pathname, scrollContainerRef]);
 
   return null;

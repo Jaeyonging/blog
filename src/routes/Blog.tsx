@@ -27,7 +27,7 @@ const Blog = () => {
     }
   }, [bid]);
   
-  const { data, isLoading, isError, error } = useQuery(['getBoardById'], () => getBoardById(bid || ''), {
+  const { data, isLoading, isError, error } = useQuery(['getBoardById', bid], () => getBoardById(bid || ''), {
     enabled: !!bid,
   });
 
