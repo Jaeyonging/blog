@@ -11,7 +11,6 @@ interface Props {
 }
 
 const TimeLine = ({ company, year, description, isMore = false, url }: Props) => {
-    const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
     const handleMoreClick = () => {
         setIsOpen(true);
