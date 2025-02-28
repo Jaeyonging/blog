@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import CompanyCard from './CompanyCard';
+import CompanyPopup from './CompanyPopup';
 
 interface Props {
     company: string;
@@ -31,7 +31,7 @@ const TimeLine = ({ company, year, description, isMore = false, url }: Props) =>
                     <span className='text-gray-500 text-[12px]'>{description}</span>
                 </div>
             </div>
-            <CompanyCard company={company} onClose={() => setIsOpen(false)} isOpen={isOpen} />
+            <CompanyPopup company={company} onClose={() => setIsOpen(false)} isOpen={isOpen} />
         </>
     );
 };

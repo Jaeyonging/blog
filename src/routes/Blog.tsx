@@ -14,16 +14,9 @@ const Blog = () => {
 
   useEffect(() => {
     if (bid) {
-      const blogKey = `viewed_${bid}`;
-      if (!localStorage.getItem(blogKey)) {
-        viewBlog(bid || '').then(() => {
-          localStorage.setItem(blogKey, 'true');
-        })
-
-        setTimeout(() => {
-          localStorage.removeItem(blogKey);
-        }, 60000);
-      }
+      viewBlog(bid || '').then(() => {
+        console.log('viewed')
+      })
     }
   }, [bid]);
   

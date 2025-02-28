@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import ProjectModal from './ProjectModal';
+import ProjectPopup from './ProjectPopup';
 
 interface Props {
     title: string;
@@ -25,7 +25,7 @@ const ProjectCard = ({ title, imgurl, url, year }: Props) => {
                 <span className='text-[16px] font-bold'>{title}</span>
                 <span className='text-[12px] text-gray-300'>{year}</span>
             </div>
-            <ProjectModal title={title} isOpen={isOpen} onClose={() => setIsOpen(false)} />
+            <ProjectPopup title={title} isOpen={isOpen} onClose={() => setIsOpen(false)} />
         </>
     )
 }

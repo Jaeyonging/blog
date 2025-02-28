@@ -1,5 +1,6 @@
 import axios from "axios";
 import { API_URL } from "../util/server";
+import { useMutation, useQueryClient } from "react-query";
 
 export const writeBlogs = async (uid: string, title: string, descr: string, tags: string[], content: string, files: File[]) => {
     const formData = new FormData();
@@ -40,7 +41,23 @@ export const addLike = async(bid: string, uid: string)=>{
     return response.data;
 }
 
-export const addComment = async(bid: string, content: string, uid: string)=>{
+const addComment = async(bid: string, content: string, uid: string)=>{
     const response = await axios.post(`${API_URL}/addComment`, {bid, content, uid});
     return response.data;
 }
+
+export const useAddComment = () => {
+    const queryClient = useQueryClient();
+  
+    return useMutation(
+      ({ bid, content, uid }: any) => addComment(bid, content, uid),
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries('getBoardById');
+        },
+        onError: (error) => {
+          console.error("댓글 추가 실패:", error);
+        },
+      }
+    );
+  };

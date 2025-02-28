@@ -1,22 +1,23 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { addComment } from '../../api/board'
-import { useQueryClient } from 'react-query'
+import { useAddComment } from '../../api/board'
+import Loading from '../../lotties/Loading'
+import TopLoading from '../../lotties/TopLoading'
 
 
 const CommentInput = () => {
     const {bid} = useParams()
     const [comment, setComment] = useState('')
     const {uid} = useSelector((state: any) => state.user)
-    const queryClient = useQueryClient()
+    const { mutate, isLoading, isError, error } = useAddComment();
     const handlesubmit = () => {
-        console.log(bid, comment, uid)
-        addComment(bid || '', comment, uid || '').then((res)=>{
-            setComment('')
-            queryClient.invalidateQueries('getBoardById')
-        })
+        mutate({bid: bid || '', content: comment, uid: uid || ''})
+        setComment('')
     }
+
+    if(isLoading) return <TopLoading/>
+    if(isError) throw error
 
     return (
         <div className='flex flex-col gap-2'>
