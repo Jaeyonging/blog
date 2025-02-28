@@ -46,7 +46,7 @@ function App() {
 
   return (
     <>
-      {!isAdmin ? <Topbar scrollContainerRef={scrollContainerRef} /> : <SideMenu />}
+      {!isAdmin ? <Topbar/> : <SideMenu />}
         <Suspense fallback={<SplashLoading />}>
           <ScrollToTop scrollContainerRef={scrollContainerRef} />
           <div ref={scrollContainerRef} className={`${!isAdmin ? 'pt-[60px] overflow-y-auto h-[calc(100vh-60px)]' : 'pl-[150px]'} text-white`}>

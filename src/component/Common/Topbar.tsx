@@ -5,7 +5,7 @@ import Lottie from 'react-lottie';
 import animationData from '../../lotties/logo.json';
 
 
-const Topbar = ({ scrollContainerRef }: { scrollContainerRef: React.RefObject<HTMLDivElement> }) => {
+const Topbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
     const [isScrolling, setIsScrolling] = useState(false);
@@ -27,28 +27,6 @@ const Topbar = ({ scrollContainerRef }: { scrollContainerRef: React.RefObject<HT
         navigate(path);
         setIsOpen(false);
     };
-
-    useEffect(() => {
-        if (!scrollContainerRef.current) return;
-
-        let timeoutId: any;
-
-        const handleScroll = () => {
-            setIsScrolling(true);
-            clearTimeout(timeoutId);
-            timeoutId = setTimeout(() => {
-                setIsScrolling(false);
-            }, 500);
-        };
-
-        const container = scrollContainerRef.current;
-        container.addEventListener('scroll', handleScroll);
-
-        return () => {
-            container.removeEventListener('scroll', handleScroll);
-            clearTimeout(timeoutId);
-        };
-    }, [scrollContainerRef]);
 
     return (
         <div className={`shadow-lg fixed top-0 left-0 w-full h-[60px] flex items-center justify-between px-4 text-[24px] bg-transparent z-20 transition-opacity duration-300 ease-in-out ${isScrolling ? 'opacity-0' : 'opacity-100'}`}>

@@ -6,18 +6,6 @@ import ProtectedRoute from "./ProtectedRoute";
 
 const AnimatedRoutes = () => {
   const location = useLocation();
-  const hostname = window.location.hostname;
-
-  const isAppRoute = hostname === "localhost";
-  const showNavBar = isAppRoute && (
-    location.pathname.startsWith("/kgeul") ||
-    location.pathname == "/about" ||
-    location.pathname.includes("/chart") ||
-    location.pathname.startsWith("/mypage") ||
-    location.pathname.startsWith("/topik") ||
-    location.pathname.startsWith("/store")
-  );
-
   return (
     <>
       <AnimatePresence mode="wait">
@@ -61,7 +49,6 @@ const AnimatedRoutes = () => {
           ))}
         </Routes>
       </AnimatePresence>
-      {/* {showNavBar && <AppNavBar />} */}
     </>
   );
 };
