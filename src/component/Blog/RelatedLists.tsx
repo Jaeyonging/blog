@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import BlogCard from '../Common/BlogCard'
 import RelatedCard from './RelatedCard'
 
 const relatedPosts = [

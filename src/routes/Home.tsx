@@ -1,3 +1,4 @@
+import ApiErrorBoundary from "../boundary/ApiErrorBoundary";
 import BlogSummary from "../component/Home/BlogSummary";
 import Introduction from "../component/Home/Introduction";
 import RecentBlogs from "../component/Home/RecentBlogs";
@@ -9,8 +10,10 @@ const Home = () => {
       <span className="text-center text-[25px] font-bold">Welcome to my Blog!</span>
       <BlogSummary />
       <Introduction/>
-      <TopBlogs />
-      <RecentBlogs/>
+      <ApiErrorBoundary>
+        <TopBlogs />
+        <RecentBlogs/>
+      </ApiErrorBoundary>
     </div>
   );
 };

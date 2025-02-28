@@ -34,7 +34,7 @@ const RecentBlogs = () => {
                     ))
                 ) : (
                     data.map((blog:any) => (
-                        <BlogCard key={blog.id} id={blog.id} title={blog.title} description={blog.descr} date={blog.created_at} image={blog.files[0].path} view={blog.view} like={blog.likes} comment={blog.comment_count} />
+                        <BlogCard key={blog.id} blogData={blog} mode='card'/>
                     ))
                 )}
             </div>

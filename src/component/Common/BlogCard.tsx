@@ -5,24 +5,16 @@ import { FaComment } from "react-icons/fa";
 import { MdOutlineVisibility } from "react-icons/md";
 import { API_URL } from '../../util/server';
 interface Props {
-    id: number;
-    title: string;
-    description: string;
-    date: string;
-    image: string;
-    view: number;
+    blogData: any;
+    mode?: string;
     width?: string;
     height?: string;
-    mode?: string;
-    category?: string[];
-    like?: number;
-    comment?: number;
 }
 
-const BlogCard = ({ id, title, description, date, image, width, height, mode = 'card', category, view, like = 0, comment = 0 }: Props) => {
+const BlogCard = ({ blogData, mode = 'card', width, height }: Props) => {
     const navigate = useNavigate();
     const handleClick = () => {
-        navigate(`/blog/${id}`);
+        navigate(`/blog/${blogData.id}`);
     }
 
     return (
@@ -30,8 +22,8 @@ const BlogCard = ({ id, title, description, date, image, width, height, mode = '
             {mode === 'card' && (
                 <div className='flex w-full h-[150px] border-2 border-[#ffffff33] rounded-md overflow-hidden'>
                     {
-                        image ? (
-                            <img src={`${API_URL}/${image}`} alt={title} className='object-cover w-full h-full' />
+                        blogData.files[0].path ? (
+                            <img src={`${API_URL}/${blogData.files[0].path}`} alt={blogData.title} className='object-cover w-full h-full' />
                         ) : (
                             <div className='flex justify-center items-center w-full h-full'>
                                 <span className='text-[12px] text-gray-300'>이미지가 없습니다.</span>
@@ -41,19 +33,25 @@ const BlogCard = ({ id, title, description, date, image, width, height, mode = '
                 </div>
             )}
             <div className='flex flex-col gap-2 mt-[10px]'>
-                <span className='text-[16px] font-bold text-white truncate'>{title}</span>
-                <div className='flex gap-2'>
-                    {category && category.map((item, index) => (
+                <span className='text-[16px] font-bold text-white truncate'>{blogData.title}</span>
+                {
+                    blogData.descr ? (
+                        <span className='text-[12px] text-gray-300 truncate'>{blogData.descr}</span>
+                    ) : (
+                        <span className='text-[12px] text-gray-300 truncate'>설명이 없습니다.</span>
+                    )
+                }
+                <div className='flex gap-2 min-h-[20px]'>
+                    {blogData.tags && blogData.tags.map((item: any, index: any) => (
                         <span key={index} className='text-[12px] text-gray-300 truncate bg-[#ffffff33] px-2 py-1 rounded-md'>{item}</span>
                     ))}
                 </div>
-                <span className='text-[12px] text-gray-300 truncate'>{description}</span>
                 <div className='flex justify-between'>
-                    <span className='text-[12px] text-gray-400'>{date}</span>
+                    <span className='text-[12px] text-gray-400'>{blogData.created_at}</span>
                     <div className='flex gap-2 text-[13px] text-gray-400 items-center'>
-                        <MdOutlineVisibility /><span>{view}</span>
-                        <AiFillLike /><span>{like}</span>
-                        <FaComment /><span>{comment}</span>
+                        <MdOutlineVisibility /><span>{blogData.view}</span>
+                        <AiFillLike /><span>{blogData.likes}</span>
+                        <FaComment /><span>{blogData.comment_count}</span>
                     </div>
                 </div>
             </div>

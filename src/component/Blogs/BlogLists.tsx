@@ -70,17 +70,9 @@ const BlogLists = () => {
             {filteredAndSortedData.length > 0 && filteredAndSortedData.map((blog: any) => (
                 <BlogCard
                     key={blog.id}
-                    id={blog.id}
-                    title={blog.title}
-                    description={blog.descr}
-                    date={blog.created_at}
-                    image={blog.files[0].path}
-                    width="100%"
+                    blogData={blog}
                     mode={selectedMode}
-                    category={blog.tags}
-                    view = {blog.view}
-                    like={blog.likes}
-                    comment={blog.comment_count}
+                    width="100%"
                 />
             ))}
         </div>
