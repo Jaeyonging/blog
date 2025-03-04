@@ -47,12 +47,10 @@ const Write = () => {
     images.forEach((img, index) => {
         const currentSrc = img.getAttribute('src');
 
-        // 기존 이미지 URL이면 유지
         if (currentSrc?.startsWith('http') || currentSrc?.startsWith(API_URL)) {
             return;
         }
 
-        // 새로운 파일이 있다면 `image{index+1}`로 설정
         if (files[index]) {
             img.setAttribute('src', `image${index + 1}`);
         }
