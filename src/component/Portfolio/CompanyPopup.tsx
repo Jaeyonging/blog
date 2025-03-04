@@ -5,6 +5,7 @@ interface Props {
     company: string;
     onClose: () => void;
     isOpen: boolean;
+    
 }
 
 const CompanyPopup = ({ company, onClose, isOpen }: Props) => {

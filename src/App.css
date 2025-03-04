@@ -71,3 +71,18 @@ body {
   color: #f8f8f2;
   overflow: visible;
 }
+
+.controls{
+  display: relative;
+}
+
+.options{
+  display: none;
+}
+
+.controls:hover .options{
+  display: flex;
+  position: absolute;
+  left: 0;
+  z-index: 10;
+}

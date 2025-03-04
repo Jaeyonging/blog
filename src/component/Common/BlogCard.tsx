@@ -18,7 +18,7 @@ const BlogCard = ({ blogData, mode = 'card', width, height }: Props) => {
     }
 
     return (
-        <div className={`flex flex-col min-w-[250px] w-[250px] p-3 rounded-lg bg-cardcolor shadow-lg hover:shadow-xl transition-shadow duration-300 ${mode === 'card' ? 'h-[280px] min-h-[280px]' : ''}`} onClick={handleClick} style={{ width: width, height: height }}>
+        <div className={`flex flex-col min-w-[250px] w-[250px] p-3 rounded-lg bg-cardcolor shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer ${mode === 'card' ? 'h-[280px] min-h-[280px]' : ''}`} onClick={handleClick} style={{ width: width, height: height }}>
             {mode === 'card' && (
                 <div className='flex w-full h-[150px] border-2 border-[#ffffff33] rounded-md overflow-hidden'>
                     {

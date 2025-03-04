@@ -71,7 +71,7 @@ const BlogLists = () => {
             {isLoading ? (
                 <div className='flex flex-col flex-wrap gap-2 lg:flex-row items-center'>
                     {Array.from({ length: 5 }).map((_, index) => (
-                        <div className='w-full lg:w-[250px]'>
+                        <div className='w-full lg:w-[250px]' key={index}>
                             <SkeletonBlogCard key={index} width='100%' height='280px' />
                         </div>
                     ))}
@@ -80,7 +80,7 @@ const BlogLists = () => {
                 : (
                     <div className='flex flex-col flex-wrap gap-2 lg:flex-row justify-evenly'>
                         {filteredAndSortedData.length > 0 && filteredAndSortedData.map((blog: any) => (
-                            <div className='w-full lg:w-[250px]'>
+                            <div className='w-full lg:w-[250px]' key={blog.id}>
                                 <BlogCard
                                     key={blog.id}
                                     blogData={blog}
