@@ -20,6 +20,7 @@ const PortfolioManage = () => {
   if (isLoading) return <Loading />
   if (isError) throw error
 
+  console.log(data);
   return (
     <>
       <div className='flex flex-col items-center'>

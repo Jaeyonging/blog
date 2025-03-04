@@ -32,7 +32,7 @@ export const LocalRouteConfig = {
     { path: "/admin/db", element: <AdminDb /> },
     { path: "/admin/visitor", element: <AdminVisitor /> },
     { path: "/admin/code", element: <AdminCode /> },
-    { path: "/admin/write", element: <Write /> },
+    { path: "/admin/write/:pid?", element: <Write /> },
   ],
 
   admin: [] as RouteConfig[],

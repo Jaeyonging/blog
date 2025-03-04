@@ -1,19 +1,39 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CustomReactQuill from '../../component/Admin/CustomReactQuill';
 import PreviewSide from '../../component/Admin/PreviewSide';
 import '../../style/quill.snow.css';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/configureStore';
-import { writeBlogs } from '../../api/board';
+import {  getBoardByPid, writeBlogs } from '../../api/board';
 import CustomInputTag from '../../component/Admin/CustomInputTag';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useQuery, useQueryClient } from 'react-query';
+import TopLoading from '../../lotties/TopLoading';
+import { API_URL } from '../../util/server';
 
 const Write = () => {
+  const { pid } = useParams();
+  const navigate = useNavigate();
   const userid = useSelector((state: RootState) => state.user.uid);
   const [summary, setSummary] = useState('');
   const [title, setTitle] = useState('');
   const [files, setFiles] = useState<File[]>([]);
   const [tags, setTags] = useState<string[]>([]);
   const [descr, setDescr] = useState('')
+  const queryClient = useQueryClient();
+
+  const {data, isLoading, isError, error} = useQuery(['getBoardByPid', pid], () => getBoardByPid(pid || ''))
+
+  console.log(data);
+  useEffect(() => {
+    if(data) {
+      setTitle(data.title);
+      setDescr(data.descr);
+      setSummary(data.content);
+      setTags(data.tags);
+      setFiles(data.files);
+    }
+  }, [data])
 
   const handleRemoveTag = (index: number) => {
     setTags(tags.filter((_, i) => i !== index));
@@ -25,19 +45,31 @@ const Write = () => {
     const images = doc.querySelectorAll('img');
 
     images.forEach((img, index) => {
-      if (files[index]) {
-        img.setAttribute('src', `image${index + 1}`);
-      }
+        const currentSrc = img.getAttribute('src');
+
+        // 기존 이미지 URL이면 유지
+        if (currentSrc?.startsWith('http') || currentSrc?.startsWith(API_URL)) {
+            return;
+        }
+
+        // 새로운 파일이 있다면 `image{index+1}`로 설정
+        if (files[index]) {
+            img.setAttribute('src', `image${index + 1}`);
+        }
     });
 
     const updatedContent = doc.body.innerHTML;
     setSummary(updatedContent);
 
-    writeBlogs(userid, title, descr, tags, updatedContent, files).then((res) => {
+    writeBlogs(userid, pid || null, title, descr, tags, updatedContent, files).then((res) => {
       console.log(res)
+      queryClient.invalidateQueries('getBoardByPid', { exact: true });
+      navigate('/admin/blog');
     });
-    
   };
+
+  if(isLoading) return <TopLoading/>
+  if(isError) throw error
 
   return (
     <div className="flex flex-col gap-2 p-2 h-screen">

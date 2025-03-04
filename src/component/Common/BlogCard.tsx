@@ -1,5 +1,5 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { AiFillLike } from "react-icons/ai";
 import { FaComment } from "react-icons/fa";
 import { MdOutlineVisibility } from "react-icons/md";
@@ -13,12 +13,22 @@ interface Props {
 
 const BlogCard = ({ blogData, mode = 'card', width, height }: Props) => {
     const navigate = useNavigate();
+    const location = useLocation();
     const handleClick = () => {
         navigate(`/blog/${blogData.id}`);
     }
 
+    const handleDelete = () => {
+        console.log('삭제');
+    }
+
+    const handleEdit = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.stopPropagation();
+        navigate(`/admin/write/${blogData.id}`);
+    }
+
     return (
-        <div className={`flex flex-col min-w-[250px] w-[250px] p-3 rounded-lg bg-cardcolor shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer ${mode === 'card' ? 'h-[280px] min-h-[280px]' : ''}`} onClick={handleClick} style={{ width: width, height: height }}>
+        <div className={`flex flex-col min-w-[250px] w-[250px] p-3 rounded-lg bg-cardcolor shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer ${mode === 'card' ? 'h-[280px] min-h-[280px] relative controls' : ''}`} onClick={handleClick} style={{ width: width, height: height }}>
             {mode === 'card' && (
                 <div className='flex w-full h-[150px] border-2 border-[#ffffff33] rounded-md overflow-hidden'>
                     {
@@ -57,6 +67,10 @@ const BlogCard = ({ blogData, mode = 'card', width, height }: Props) => {
                     </div>
                 </div>
             </div>
+            {location.pathname.includes('/admin') && <div className='options'>
+                <button className='bg-[red] p-2 rounded-[5px]' onClick={handleDelete}>삭제</button>
+                <button className='bg-[yellow] text-black p-2 rounded-[5px]' onClick={handleEdit}>수정</button>
+            </div>}
         </div>
     );
 }
