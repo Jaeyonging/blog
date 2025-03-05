@@ -22,7 +22,7 @@ const Write = () => {
   const [descr, setDescr] = useState('')
   const queryClient = useQueryClient();
 
-  const {data, isLoading, isError, error} = useQuery(['getBoardByPid', pid], () => getBoardByPid(pid || ''))
+  const {data, isLoading, isError, error} = useQuery(['getBoardByPid', pid], () => getBoardByPid(pid || ''), {enabled: !!pid})
 
   useEffect(() => {
     if(data) {
