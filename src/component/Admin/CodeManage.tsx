@@ -12,22 +12,24 @@ const CodeManage = () => {
   };
 
   const { data, isLoading, isError, error } = useQuery(['getCode'], getCode);
+
   if (isLoading) return <Loading />;
   if (isError) throw error;
 
-  const groupedData = data.results.reduce((acc: any, item: any) => {
+  const groupedData = (data?.results || []).reduce((acc: any, item: any) => {
     if (!acc[item.tag]) {
       acc[item.tag] = [];
     }
     acc[item.tag].push(item);
     return acc;
   }, {});
-  
+
+
   return (
     <>
       <div className='flex flex-col p-2'>
         <button className='border-[1px] rounded-[10px] gap-2 cursor-pointer py-3 w-[80%] ml-[10%] hover:bg-gray-200 hover:text-black' onClick={handlePopup}>코드 추가</button>
-        {Object.keys(groupedData).map((tag) => (
+        {groupedData && Object.keys(groupedData).map((tag) => (
           <CodeCard key={tag} groupedData={groupedData} tag={tag} />
         ))}
       </div>
