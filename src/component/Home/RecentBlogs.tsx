@@ -10,7 +10,6 @@ const RecentBlogs = () => {
     const navigate = useNavigate()
     const { data, isLoading, isError, error } = useQuery(['getBlogs','recent','all'], () => getBlogs('recent','all'), {
         onSuccess: (data) => {
-            console.log(data)
         }
     });
 

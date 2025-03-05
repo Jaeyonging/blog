@@ -24,7 +24,6 @@ const Write = () => {
 
   const {data, isLoading, isError, error} = useQuery(['getBoardByPid', pid], () => getBoardByPid(pid || ''))
 
-  console.log(data);
   useEffect(() => {
     if(data) {
       setTitle(data.title);
@@ -60,7 +59,6 @@ const Write = () => {
     setSummary(updatedContent);
 
     writeBlogs(userid, pid || null, title, descr, tags, updatedContent, files).then((res) => {
-      console.log(res)
       queryClient.invalidateQueries('getBoardByPid', { exact: true });
       navigate('/admin/blog');
     });

@@ -22,14 +22,12 @@ const BlogLists = () => {
 
     const { data, isLoading, isError, error } = useQuery(['getBlogs', filter, tag], () => getBlogs(filter, tag), {
         onSuccess: (data) => {
-            console.log("Fetched data:", data);
         }
     });
 
     // if (isLoading) return <Loading />;
     if (isError) throw error;
 
-    console.log(data)
 
     const filteredAndSortedData = (() => {
         if (!Array.isArray(data)) return [];

@@ -44,7 +44,6 @@ const AddPortfolio = ({ isOpen, onClose, projectId }: Props) => {
 
     useEffect(() => {
         if (projectData) {
-            console.log(projectData);
     
             setTitle(projectData.name || '');
             setStart(projectData.start_date || '');
@@ -85,12 +84,9 @@ const AddPortfolio = ({ isOpen, onClose, projectId }: Props) => {
         const updatedContent = doc.body.innerHTML;
         setSummary(updatedContent);
     
-        console.log(files);
-        console.log(updatedContent);
     
         // API 호출 (주석 해제 시 동작)
         addProject(uid, projectId, type, title, start, end, updatedContent, files).then((res) => {
-            console.log(res)
             queryClient.invalidateQueries('getProjects', { exact: true });
             onClose();
         });

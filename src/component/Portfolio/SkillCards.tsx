@@ -23,7 +23,6 @@ const SkillCards = () => {
 
   const { data, isLoading, isError, error } = useQuery('getProjects', getProjects)
 
-  console.log(data)
   if (isLoading) return <Loading />
   if (isError) throw error
 

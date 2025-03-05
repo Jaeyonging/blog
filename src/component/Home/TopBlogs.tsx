@@ -12,7 +12,6 @@ const TopBlogs = () => {
 
     const { data, isLoading, isError, error } = useQuery(['getBlogs','top','all'], () => getBlogs('top', 'all'), {
         onSuccess: (data) => {
-            console.log("Fetched data:", data);
         }
     });
 

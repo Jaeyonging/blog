@@ -12,7 +12,6 @@ import { API_URL } from '../../util/server'
 const PortfolioManage = () => {
   const [isOpen, setIsOpen] = useState(false)
   const handleClick = () => {
-    console.log('커리어 추가');
     setIsOpen(!isOpen)
   };
 
@@ -20,7 +19,6 @@ const PortfolioManage = () => {
   if (isLoading) return <Loading />
   if (isError) throw error
 
-  console.log(data);
   return (
     <>
       <div className='flex flex-col items-center'>

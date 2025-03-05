@@ -15,7 +15,6 @@ const Blog = () => {
   useEffect(() => {
     if (bid) {
       viewBlog(bid || '').then(() => {
-        console.log('viewed')
       })
     }
   }, [bid]);
@@ -24,7 +23,6 @@ const Blog = () => {
     enabled: !!bid,
   });
 
-  console.log(data)
 
   if (isLoading) return <Loading />;
   if (isError) throw error;

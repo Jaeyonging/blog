@@ -5,7 +5,6 @@ const MessageInput = () => {
     const [message, setMessage] = useState('');
     const onClickHanlder = () => {
         if(window.confirm('정말 메세지를 보내시겠습니까?')) {
-            console.log(name, message);
         }
     }
     return (
