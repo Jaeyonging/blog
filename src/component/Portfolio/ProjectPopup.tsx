@@ -21,7 +21,7 @@ const ProjectPopup = ({ pid, title, isOpen, onClose }: Props) => {
 
         <PopupHeader title={title} isOpen={isOpen} onClose={onClose}>
             <div className='flex flex-col gap-2'>
-                <div className='ql-editor bg-cardcolor text-white rounded-[10px]' dangerouslySetInnerHTML={{ __html: data.content }}></div>
+                <div className='ql-editor bg-cardcolor text-white rounded-[10px] text-[13px]' dangerouslySetInnerHTML={{ __html: data.content }}></div>
             </div>
         </PopupHeader>
     )

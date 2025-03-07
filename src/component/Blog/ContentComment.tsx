@@ -7,13 +7,14 @@ interface Props {
 }
 
 const ContentComment = ({ comment }: Props) => {
+  console.log(comment)
   return (
     <div className='flex flex-col gap-2'>
       <h1 className='text-2xl font-bold'>댓글</h1>
       <CommentInput/>
       {
         comment.map((item) => (
-          <CommentCard key={item.id} comment={item.content} date={item.created_at}/>
+          <CommentCard key={item.id} nickname={item.nickname} comment={item.content} date={item.created_at}/>
         ))
       }
     </div>

@@ -22,12 +22,12 @@ const Blog = () => {
   const { data, isLoading, isError, error } = useQuery(['getBoardById', bid], () => getBoardById(bid || ''), {
     enabled: !!bid,
   });
+  
 
 
   if (isLoading) return <Loading />;
   if (isError) throw error;
-
-
+ 
   return (
     <div className='flex flex-col gap-2 p-2'>
       <ContentHeader title={data.title} view={data.view} date={data.created_at} />

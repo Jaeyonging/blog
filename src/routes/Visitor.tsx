@@ -17,7 +17,7 @@ const Visitor = () => {
       <span className='text-[24px] font-bold text-center'>Thanks for visiting my website!</span>
       <div className='flex flex-col gap-2 max-h-[calc(100vh-60px-300px)] overflow-y-auto min-h-[100px]'>
         {data && data.results.map((item: any) => (
-          <VisitorCard name={'익명'} message={item.message} key={item.id} />
+          <VisitorCard name={item.nickname} message={item.message} key={item.id} />
         ))}
       </div>
       <MessageInput />

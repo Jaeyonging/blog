@@ -10,6 +10,7 @@ const MessageInput = () => {
     const onClickHanlder = () => {
         if(window.confirm('정말 메세지를 보내시겠습니까?')) {
             writeVisit(uid, message).then(() => {
+                setMessage('')
                 queryClient.invalidateQueries('getVisitBoard')
             })
         }
