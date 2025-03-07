@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { LocalRouteConfig } from "./LocalRouteConfig";
 import ProtectedRoute from "./ProtectedRoute";
@@ -47,6 +47,7 @@ const AnimatedRoutes = () => {
               }
             />
           ))}
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </AnimatePresence>
     </>

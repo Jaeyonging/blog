@@ -27,7 +27,7 @@ export const LocalRouteConfig = {
     { path: '/visitor', element: <Visitor /> },
   ],
   protected: [
-    { path: "/admin/:title?", element: <AdminBlog /> },
+    { path: "/admin/", element: <AdminBlog /> },
     { path: "/admin/comment", element: <AdminComment /> },
     { path: "/admin/blog", element: <AdminBlog /> },
     { path: "/admin/portfolio", element: <AdminPortfolio /> },
