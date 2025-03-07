@@ -80,9 +80,20 @@ body {
   display: none;
 }
 
+.optionsright{
+  display: none;
+}
+
 .controls:hover .options{
   display: flex;
   position: absolute;
   left: 0;
+  z-index: 10;
+}
+
+.controls:hover .optionsright{
+  display: flex;
+  position: absolute;
+  right: 0;
   z-index: 10;
 }

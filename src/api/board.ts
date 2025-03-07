@@ -89,6 +89,11 @@ export const getProjects = async() => {
   return response.data;
 }
 
+export const getComments = async() => {
+  const response = await axios.get(`${API_URL}/getComments`);
+  return response.data;
+}
+
 export const getProjectById = async(pid: string) => {
   const response = await axios.post(`${API_URL}/getProjectById`, {pid});
   return response.data;
@@ -96,5 +101,20 @@ export const getProjectById = async(pid: string) => {
 
 export const getBoardByPid = async(pid: string) => {
   const response = await axios.post(`${API_URL}/getBoardByPid`, {pid});
+  return response.data;
+}
+
+export const deleteComment = async(id: string) => {
+  const response = await axios.post(`${API_URL}/deleteComment`, {id});
+  return response.data;
+}
+
+export const getVisitBoard = async() => {
+  const response = await axios.get(`${API_URL}/getVisitBoard`);
+  return response.data;
+}
+
+export const writeVisit = async(uid: string, message: string) => {
+  const response = await axios.post(`${API_URL}/writeVisit`, {uid, message});
   return response.data;
 }
