@@ -5,16 +5,12 @@ import SkeletonBlogCard from '../Common/SkeletonBlogCard';
 import { useQuery } from 'react-query';
 import { getBlogs } from '../../api/board';
 import Loading from '../../lotties/Loading';
+import FetchgetBlogs from '../../api/hooks/FetchgetBlogs';
 
 const TopBlogs = () => {
     const navigate = useNavigate();
     const blognumber = 5;
-
-    const { data, isLoading, isError, error } = useQuery(['getBlogs','top','all'], () => getBlogs('top', 'all'), {
-        onSuccess: (data) => {
-        }
-    });
-
+    const {data, isLoading, isError, error} = FetchgetBlogs();
     // if (isLoading) return <Loading />;
     if (isError) throw error;
 
