@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import PopupHeader from './PopupHeader';
-import { addCode } from '../../api/code';
+import { addCode } from '../../api/code/code';
 import { useQueryClient } from 'react-query';
 
 interface Props {

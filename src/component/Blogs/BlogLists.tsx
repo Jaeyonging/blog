@@ -4,7 +4,7 @@ import { BsList } from "react-icons/bs";
 import { MdOutlineViewStream } from "react-icons/md";
 import { useSearchParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
-import { getBlogs } from '../../api/board';
+import { getBlogs } from '../../api/board/board';
 import Loading from '../../lotties/Loading';
 import SkeletonBlogCard from '../Common/SkeletonBlogCard';
 

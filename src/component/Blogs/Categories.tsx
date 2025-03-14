@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 import CategoryCard from './CategoryCard';
-import { getCodeByTag } from '../../api/code';
+import { getCodeByTag } from '../../api/code/code';
 import Loading from '../../lotties/Loading';
 
 const Categories = () => {

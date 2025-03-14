@@ -1,6 +1,6 @@
 import React from 'react'
 import { useQuery } from 'react-query'
-import { getComments } from '../../api/board'
+import { getComments } from '../../api/board/board'
 import Loading from '../../lotties/Loading'
 import CommentCard from './CommentCard'
 

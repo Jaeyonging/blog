@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux';
-import { writeVisit } from '../../api/board';
+import { writeVisit } from '../../api/board/board';
 import { useQueryClient } from 'react-query';
+import { useUserStore } from '../../store/data';
 
 const MessageInput = () => {
     const [message, setMessage] = useState('');
-    const {uid} = useSelector((state: any) => state.user)
+    const {id} = useUserStore()
     const queryClient = useQueryClient()
     const onClickHanlder = () => {
         if(window.confirm('정말 메세지를 보내시겠습니까?')) {
-            writeVisit(uid, message).then(() => {
+            writeVisit(id, message).then(() => {
                 setMessage('')
                 queryClient.invalidateQueries('getVisitBoard')
             })

@@ -2,7 +2,7 @@ import React from 'react'
 import PopupHeader from '../Popup/PopupHeader';
 import Loading from '../../lotties/Loading';
 import { useQuery } from 'react-query';
-import { getProjectById } from '../../api/board';
+import { getProjectById } from '../../api/board/board';
 import TopLoading from '../../lotties/TopLoading';
 import '../../style/quill.snow.css'
 interface Props {

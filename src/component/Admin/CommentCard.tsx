@@ -1,5 +1,5 @@
 import React from 'react'
-import { deleteComment } from '../../api/board'
+import { deleteComment } from '../../api/board/board'
 import { useQueryClient } from 'react-query'
 
 interface Props {

@@ -1,6 +1,6 @@
 import axios from "axios";
-import { API_URL } from "../util/server";
 import { useMutation, useQueryClient } from "react-query";
+import { API_URL } from "../../util/server";
 
 export const addCode = async (name: string, tag: string, ext: string) => {
     const response = await axios.post(`${API_URL}/addCode`, {

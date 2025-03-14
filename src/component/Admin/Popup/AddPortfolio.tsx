@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import PopupHeader from '../../Popup/PopupHeader';
 import { useQuery, useQueryClient } from 'react-query';
-import { getCodeByTag } from '../../../api/code';
+import { getCodeByTag } from '../../../api/code/code';
 import Loading from '../../../lotties/Loading';
 import CustomReactQuill from '../CustomReactQuill';
-import { addProject, getProjectById } from '../../../api/board';
-import { useSelector } from 'react-redux';
+import { addProject, getProjectById } from '../../../api/board/board';
 import TopLoading from '../../../lotties/TopLoading';
 import { API_URL } from '../../../util/server';
+import { useUserStore } from '../../../store/data';
 
 interface Props {
     projectId?: any;
@@ -16,7 +16,7 @@ interface Props {
 }
 
 const AddPortfolio = ({ isOpen, onClose, projectId }: Props) => {
-    const { uid } = useSelector((state: any) => state.user);
+    const { id } = useUserStore();
     const [summary, setSummary] = useState('');
     const [title, setTitle] = useState('');
     const [start, setStart] = useState('');
@@ -86,7 +86,7 @@ const AddPortfolio = ({ isOpen, onClose, projectId }: Props) => {
     
     
         // API 호출 (주석 해제 시 동작)
-        addProject(uid, projectId, type, title, start, end, updatedContent, files).then((res) => {
+        addProject(id, projectId, type, title, start, end, updatedContent, files).then((res) => {
             queryClient.invalidateQueries('getProjects', { exact: true });
             onClose();
         });

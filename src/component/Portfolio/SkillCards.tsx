@@ -7,7 +7,7 @@ import ProjectCard from './ProjectCard';
 import MyInfoCard from './MyInfoCard';
 import GameCard from './GameCard';
 import { useQuery } from 'react-query';
-import { getProjects } from '../../api/board';
+import { getProjects } from '../../api/board/board';
 import Loading from '../../lotties/Loading';
 import { API_URL } from '../../util/server';
 

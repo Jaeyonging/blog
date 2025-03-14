@@ -1,6 +1,6 @@
 import axios from "axios";
-import { API_URL } from "../util/server";
 import { useMutation, useQueryClient } from "react-query";
+import { API_URL } from "../../util/server";
 
 export const writeBlogs = async (uid: string, pid: string | null = null, title: string, descr: string, tags: string[], content: string, files: File[]) => {
   const formData = new FormData();

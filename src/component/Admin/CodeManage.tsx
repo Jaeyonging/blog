@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import CodePopup from '../Popup/CodePopup';
 import { useQuery } from 'react-query';
-import { getCode } from '../../api/code';
+import { getCode } from '../../api/code/code';
 import Loading from '../../lotties/Loading';
 import CodeCard from './CodeCard';
 

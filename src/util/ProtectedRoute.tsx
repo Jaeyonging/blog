@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 
-import { getCookie } from './cookies';
-import { useSelector } from 'react-redux';
-import { useQuery } from 'react-query';
-import { checkMaster } from '../api/login';
 import SplashLoading from '../lotties/SplashLoading';
 import { useUserStore } from '../store/data';
+import { checkMaster } from '../api/login/login';
+import { useQuery } from 'react-query';
 
 interface ProtectedRouteProps {
   children: React.ReactNode;

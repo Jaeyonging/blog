@@ -5,9 +5,9 @@ import ContentFooter from '../component/Blog/ContentFooter'
 import ContentComment from '../component/Blog/ContentComment'
 import { useParams } from 'react-router-dom'
 import { useQuery } from 'react-query'
-import { getBoardById, viewBlog } from '../api/board'
 import Loading from '../lotties/Loading'
 import ContentLikesComments from '../component/Blog/ContentLikes'
+import { getBoardById, viewBlog } from '../api/board/board'
 
 const Blog = () => {
   const { bid } = useParams();

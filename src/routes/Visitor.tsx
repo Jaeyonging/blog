@@ -2,7 +2,7 @@ import React from 'react'
 import VisitorCard from '../component/Visitor/VisitorCard'
 import MessageInput from '../component/Visitor/MessageInput'
 import { useQuery } from 'react-query'
-import { getVisitBoard } from '../api/board'
+import { getVisitBoard } from '../api/board/board'
 import Loading from '../lotties/Loading'
 
 const Visitor = () => {

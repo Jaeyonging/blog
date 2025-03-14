@@ -7,12 +7,12 @@ import Topbar from "./component/Common/Topbar";
 import BottomBar from "./component/Common/BottomBar";
 import ScrollToTop from "./component/Common/ScrollToTop";
 import SideMenu from "./component/Admin/SideMenu";
-import { checkIP, getIPaddress } from "./api/login";
 import { useQuery, useMutation } from "react-query";
 import Loading from "./lotties/Loading";
 import SplashLoading from "./lotties/SplashLoading";
 import AnimatedRoutes from "./util/AnimatedRoutes";
 import { useUserStore } from "./store/data";
+import { checkIP, getIPaddress } from "./api/login/login";
 
 function App() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useQuery } from 'react-query'
-import { useGetDb } from '../../api/code';
 import TopLoading from '../../lotties/TopLoading';
+import { useGetDb } from '../../api/code/code';
 
 const DbManage = () => {
     const { mutate, isLoading, error } = useGetDb();

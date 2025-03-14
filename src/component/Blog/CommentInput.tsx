@@ -1,18 +1,18 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { useAddComment } from '../../api/board'
+import { useAddComment } from '../../api/board/board'
 import Loading from '../../lotties/Loading'
 import TopLoading from '../../lotties/TopLoading'
+import { useUserStore } from '../../store/data'
 
 
 const CommentInput = () => {
     const {bid} = useParams()
     const [comment, setComment] = useState('')
-    const {uid} = useSelector((state: any) => state.user)
+    const {id} = useUserStore()
     const { mutate, isLoading, isError, error } = useAddComment();
     const handlesubmit = () => {
-        mutate({bid: bid || '', content: comment, uid: uid || ''})
+        mutate({bid: bid || '', content: comment, uid: id || ''})
         setComment('')
     }
 

@@ -4,10 +4,10 @@ import MyInfoCard from '../Portfolio/MyInfoCard'
 import TimeLine from '../Portfolio/TimeLine'
 import AddPortfolio from './Popup/AddPortfolio'
 import { useQuery } from 'react-query'
-import { getProjects } from '../../api/board'
 import Loading from '../../lotties/Loading'
 import ProjectCard from '../Portfolio/ProjectCard'
 import { API_URL } from '../../util/server'
+import { getProjects } from '../../api/board/board'
 
 const PortfolioManage = () => {
   const [isOpen, setIsOpen] = useState(false)

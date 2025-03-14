@@ -3,7 +3,7 @@ import BlogCard from '../Common/BlogCard'
 import { useNavigate } from 'react-router-dom'
 import Loading from '../../lotties/Loading';
 import { useQuery } from 'react-query';
-import { getBlogs } from '../../api/board';
+import { getBlogs } from '../../api/board/board';
 import SkeletonBlogCard from '../Common/SkeletonBlogCard';
 
 const RecentBlogs = () => {

@@ -2,10 +2,9 @@ import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import { AiFillLike } from "react-icons/ai";
 import { FaComment } from "react-icons/fa";
-import { useSelector } from 'react-redux';
-import { RootState } from '../../store/configureStore';
-import { addLike } from '../../api/board';
+import { addLike } from '../../api/board/board';
 import { useQueryClient } from 'react-query';
+import { useUserStore } from '../../store/data';
 
 interface Props {
     like: number;
@@ -14,10 +13,10 @@ interface Props {
 
 const ContentLikesComments = ({ like, comment }: Props) => {
   const {bid} = useParams()
-  const {uid} = useSelector((state: RootState)=>state.user)
   const queryClient = useQueryClient()
+  const {id} = useUserStore()
   const handleLike = () => {
-    addLike(bid || '', uid || '').then((res)=>{
+    addLike(bid || '', id || '').then((res)=>{
       queryClient.invalidateQueries('getBoardById')
     })
   }
