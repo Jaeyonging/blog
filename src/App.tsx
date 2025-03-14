@@ -10,17 +10,15 @@ import SideMenu from "./component/Admin/SideMenu";
 import { checkIP, getIPaddress } from "./api/login";
 import { useQuery, useMutation } from "react-query";
 import Loading from "./lotties/Loading";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "./store/configureStore";
-import { changeUID } from "./store/userSlice";
 import SplashLoading from "./lotties/SplashLoading";
 import AnimatedRoutes from "./util/AnimatedRoutes";
+import { useUserStore } from "./store/data";
 
 function App() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
+  const { id, setId } = useUserStore();
   const isAdmin = location.pathname.includes('/admin');
-  const dispatch = useDispatch();
   const { data: ipData, isLoading: isIPLoading, isError: isIPError, error: ipError } = useQuery(
     ['getIPaddress'],
     getIPaddress,
@@ -36,7 +34,7 @@ function App() {
     {
       onSuccess: (res) => {
         if(res.id){
-          dispatch(changeUID(res.id))
+          setId(res.id)
         }
       },
     }

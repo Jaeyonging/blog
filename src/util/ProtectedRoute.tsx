@@ -3,17 +3,17 @@ import { Navigate, useLocation } from 'react-router-dom';
 
 import { getCookie } from './cookies';
 import { useSelector } from 'react-redux';
-import { RootState } from '../store/configureStore';
 import { useQuery } from 'react-query';
 import { checkMaster } from '../api/login';
 import SplashLoading from '../lotties/SplashLoading';
+import { useUserStore } from '../store/data';
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
 }
 
 const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
-  const id = useSelector((state: RootState) => state.user.uid) || '-1';
+  const {id} = useUserStore();
   const {data, isLoading, isError, error} = useQuery(
     ['checkMaster', id],
     () => checkMaster(id),
