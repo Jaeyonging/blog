@@ -34,7 +34,7 @@ const Blog = () => {
       <ContentBody content={data.content} />
       <ContentLikesComments like={data.likes} comment={data.comment_count} />
       <ContentComment comment={data.comments} />
-      <ContentFooter />
+      {/* <ContentFooter /> */}
     </div>
   )
 }
