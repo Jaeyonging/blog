@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import BlogCard from '../Common/BlogCard';
 import { useNavigate } from 'react-router-dom';
 import SkeletonBlogCard from '../Common/SkeletonBlogCard';
-import { FetchgetBlogs } from '../../api/board/boardHooks';
+import { useGetBlogs } from '../../api/board/boardHooks';
 
 const TopBlogs = () => {
     const navigate = useNavigate();
     const blognumber = 5;
-    const {data, isLoading, isError, error} = FetchgetBlogs('top', 'all');
+    const {data, isLoading, isError, error} = useGetBlogs('top', 'all');
     // if (isLoading) return <Loading />;
     if (isError) throw error;
 
