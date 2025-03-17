@@ -4,6 +4,8 @@ import { AiFillLike } from "react-icons/ai";
 import { FaComment } from "react-icons/fa";
 import { MdOutlineVisibility } from "react-icons/md";
 import { API_URL } from '../../util/server';
+import { deleteBlogById } from '../../api/board/board';
+import { useQueryClient } from 'react-query';
 interface Props {
     blogData: any;
     mode?: string;
@@ -14,12 +16,16 @@ interface Props {
 const BlogCard = ({ blogData, mode = 'card', width, height }: Props) => {
     const navigate = useNavigate();
     const location = useLocation();
+    const queryClient = useQueryClient();
     const handleClick = () => {
         navigate(`/blog/${blogData.id}`);
     }
 
-    const handleDelete = () => {
-        console.log('삭제');
+    const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.stopPropagation();
+        deleteBlogById(blogData.id).then(() => {
+            queryClient.invalidateQueries(['getBlogs']);
+        })
     }
 
     const handleEdit = (e: React.MouseEvent<HTMLButtonElement>) => {
