@@ -14,9 +14,9 @@ interface Props {
 const ContentLikesComments = ({ like, comment }: Props) => {
   const {bid} = useParams()
   const queryClient = useQueryClient()
-  const {id} = useUserStore()
+  const {user} = useUserStore()
   const handleLike = () => {
-    addLike(bid || '', id || '').then((res)=>{
+    addLike(bid || '', user.id || '').then((res)=>{
       queryClient.invalidateQueries('getBoardById')
     })
   }

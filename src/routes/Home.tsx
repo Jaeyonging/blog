@@ -1,3 +1,4 @@
+import { RecentBlogsFetcher, TopBlogsFetcher } from "../api/board/boardHooks";
 import ApiErrorBoundary from "../boundary/ApiErrorBoundary";
 import BlogSummary from "../component/Home/BlogSummary";
 import Introduction from "../component/Home/Introduction";
@@ -9,10 +10,18 @@ const Home = () => {
     <div className="flex flex-col p-3 gap-3">
       <span className="text-center text-[25px] font-bold">Welcome to my Blog!</span>
       <BlogSummary />
-      <Introduction/>
+      <Introduction />
+      
       <ApiErrorBoundary>
-        <TopBlogs />
-        <RecentBlogs/>
+        <TopBlogsFetcher>
+          <TopBlogs />
+        </TopBlogsFetcher>
+      </ApiErrorBoundary>
+
+      <ApiErrorBoundary>
+        <RecentBlogsFetcher>
+          <RecentBlogs />
+        </RecentBlogsFetcher>
       </ApiErrorBoundary>
     </div>
   );

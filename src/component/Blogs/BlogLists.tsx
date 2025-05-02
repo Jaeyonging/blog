@@ -7,8 +7,10 @@ import { useQuery } from 'react-query';
 import { getBlogs } from '../../api/board/board';
 import Loading from '../../lotties/Loading';
 import SkeletonBlogCard from '../Common/SkeletonBlogCard';
+import { useBlogStore } from '../../store/data';
 
 const BlogLists = () => {
+    const { blogs, isBlogsLoading } = useBlogStore();
     const [searchParams, setSearchParams] = useSearchParams();
     const filter = searchParams.get('filter') || 'recent';
     const tag = searchParams.get('tag') || 'all';
@@ -20,19 +22,10 @@ const BlogLists = () => {
         setSearchParams(newParams);
     }
 
-    const { data, isLoading, isError, error } = useQuery(['getBlogs', filter, tag], () => getBlogs(filter, tag), {
-        onSuccess: (data) => {
-        }
-    });
-
-    // if (isLoading) return <Loading />;
-    if (isError) throw error;
-
-
     const filteredAndSortedData = (() => {
-        if (!Array.isArray(data)) return [];
+        if (!Array.isArray(blogs)) return [];
 
-        let filteredData = [...data];
+        let filteredData = [...blogs];
 
         if (tag !== 'all') {
             filteredData = filteredData.filter((blog) =>
@@ -66,7 +59,7 @@ const BlogLists = () => {
                 <BsList className={`cursor-pointer ${selectedMode === 'list' ? 'text-white' : 'text-gray-400'}`} onClick={() => handleModeChange('list')} />
             </div>
 
-            {isLoading ? (
+            {isBlogsLoading ? (
                 <div className='flex flex-col flex-wrap gap-2 lg:flex-row items-center'>
                     {Array.from({ length: 5 }).map((_, index) => (
                         <div className='w-full lg:w-[250px]' key={index}>
