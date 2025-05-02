@@ -10,6 +10,7 @@ import { useQuery } from 'react-query';
 import { getProjects } from '../../api/board/board';
 import Loading from '../../lotties/Loading';
 import { API_URL } from '../../util/server';
+import { useFetchDataStore } from '../../store/data';
 
 const SkillCards = () => {
   const defaultOptions = {
@@ -21,10 +22,7 @@ const SkillCards = () => {
     },
   };
 
-  const { data, isLoading, isError, error } = useQuery('getProjects', getProjects)
-
-  if (isLoading) return <Loading />
-  if (isError) throw error
+  const { data } = useFetchDataStore();
 
   return (
     <div className='flex flex-col p-4 gap-2'>

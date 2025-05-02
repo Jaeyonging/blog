@@ -14,6 +14,7 @@ const Blogs = () => {
           <Categories />
         </CategoriesFetcher>
       </ApiErrorBoundary>
+      
       <ApiErrorBoundary>
         <BlogListsFetcher>
           <BlogLists />

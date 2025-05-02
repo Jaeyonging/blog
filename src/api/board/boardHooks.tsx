@@ -1,10 +1,10 @@
 
 import { useQuery } from "react-query";
-import { getBlogs } from "./board";
-import { useBlogStore } from "../../store/data";
+import { getBlogs, getBoardById, getBoardByPid, getProjects, getVisitBoard } from "./board";
+import { useBlogStore, useFetchDataStore } from "../../store/data";
 import { useEffect } from "react";
 import Loading from "../../lotties/Loading";
-import { useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 
 export const useGetBlogs = (filter:string, tag: string) => {
     return useQuery(['getBlogs', filter, tag], () => getBlogs(filter, tag), {});
@@ -70,6 +70,66 @@ export const BlogListsFetcher = ({children}:{children:React.ReactNode}) => {
         }
     },[data])
 
+    if(isError) throw error;
+
+    return <>{data && children}</>
+}
+
+export const VisitBoardFetcher = ({children}:{children:React.ReactNode}) => {
+    const {  setData } = useFetchDataStore();
+    const { data, isLoading, isError, error } = useQuery(['getVisitBoard'], () => getVisitBoard());
+
+    useEffect(()=>{
+        if(data){
+            setData(data);
+        }
+        return () => {
+            setData(null);
+        }
+    },[data])
+
+    if(isLoading) return <Loading />;
+    if(isError) throw error;
+
+    return <>{data && children}</>
+}
+
+export const PortfolioFetcher = ({children}:{children:React.ReactNode}) => {
+    const { data, isLoading, isError, error } = useQuery(['getProjects'], () => getProjects());
+    const { setData } = useFetchDataStore();
+
+    useEffect(()=>{
+        if(data){
+            setData(data);
+        }
+        return () => {
+            setData(null);
+        }
+    },[data])
+
+    if(isLoading) return <Loading />;
+    if(isError) throw error;
+
+    return <>{data && children}</>
+}
+
+export const BlogFetcher = ({children}:{children:React.ReactNode}) => {
+    const { bid } = useParams();
+    const {setData} = useFetchDataStore();
+    const { data, isLoading, isError, error } = useQuery(['getBoardById', bid], () => getBoardById(bid || ''), {
+        enabled: !!bid,
+    });
+
+    useEffect(()=>{
+        if(data){
+            setData(data);
+        }
+        return () => {
+            setData(null);
+        }
+    },[data])
+
+    if(isLoading) return <Loading />;
     if(isError) throw error;
 
     return <>{data && children}</>
