@@ -7,3 +7,8 @@ export const getUserInfo = async (uid: string) => {
     });
     return response.data;
 }
+
+export const getVisitLog = async () => {
+    const response = await axios.get(`${API_URL}/getVisitLog`);
+    return response.data;
+}

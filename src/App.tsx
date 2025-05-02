@@ -17,7 +17,7 @@ import { useUserStore } from "./store/data";
 function App() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
-  const {user, setUser} = useUserStore()
+  const {setUser} = useUserStore()
   const isAdmin = location.pathname.includes('/admin');
   const { data: ipData, isLoading: isIPLoading, isError: isIPError, error: ipError } = useQuery(
     ['getIPaddress'],

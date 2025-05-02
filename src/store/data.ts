@@ -78,4 +78,16 @@ const useCodeStore = create<CodeState>((set) => ({
     resetCodes: () => set({ codes: null }),
 }));
 
-export { useFetchDataStore, useUserStore, useBlogStore, useCodeStore };
+interface VisitLogState{
+    visitLogs: any;
+    setVisitLogs: (newVisitLogs: any) => void;
+    resetVisitLogs: () => void;
+}
+
+const useVisitLogStore = create<VisitLogState>((set) => ({
+    visitLogs: null,
+    setVisitLogs: (newVisitLogs) => set({ visitLogs: newVisitLogs }),
+    resetVisitLogs: () => set({ visitLogs: null }),
+}));
+
+export { useFetchDataStore, useUserStore, useBlogStore, useCodeStore, useVisitLogStore };
