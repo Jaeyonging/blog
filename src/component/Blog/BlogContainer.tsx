@@ -1,12 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ContentHeader from './ContentHeader'
 import ContentBody from './ContentBody'
 import ContentLikesComments from './ContentLikes'
 import ContentComment from './ContentComment'
 import { useFetchDataStore } from '../../store/data'
+import { viewBlog } from '../../api/board/board'
 
 const BlogContainer = () => {
     const { data } = useFetchDataStore();
+    useEffect(() => {
+        if (data && data.board_id) {
+            viewBlog(data.board_id);
+        }
+    }, [data])
 
     return (
         <>
