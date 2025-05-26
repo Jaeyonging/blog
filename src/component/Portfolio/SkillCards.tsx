@@ -40,13 +40,13 @@ const SkillCards = () => {
 
       <span className='text-[24px] font-bold mt-[20px]'>Timeline</span>
       <div className='border-l-2 border-white gap-3 flex flex-col bg-cardcolor p-2 py-3 rounded-[10px]'>
-        {data&&data.portfolio.map((item: any) => (
+        {data && data.portfolio && data.portfolio.map((item: any) => (
           <TimeLine projectData={item} key={item.id}/>
         ))}
       </div>
       <span className='text-[24px] font-bold mt-[20px]'>Projects</span>
       <div className='flex flex-wrap items-center gap-2'>
-        {data && data.project.map((item: any) => (
+        {data && data.projects && data.projects.map((item: any) => (
           <ProjectCard pid={item.id} title={item.name} imgurl={API_URL + "/" + item.file.file_path} year={item.start_date + ' ~ ' + item.end_date} key={item.id} />
         ))}
       </div>
