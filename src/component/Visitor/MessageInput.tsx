@@ -5,11 +5,11 @@ import { useUserStore } from '../../store/data';
 
 const MessageInput = () => {
     const [message, setMessage] = useState('');
-    const {id} = useUserStore()
+    const {user} = useUserStore()
     const queryClient = useQueryClient()
     const onClickHanlder = () => {
         if(window.confirm('정말 메세지를 보내시겠습니까?')) {
-            writeVisit(id, message).then(() => {
+            writeVisit(user.id, message).then(() => {
                 setMessage('')
                 queryClient.invalidateQueries('getVisitBoard')
             })

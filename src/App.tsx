@@ -11,13 +11,13 @@ import { useQuery, useMutation } from "react-query";
 import Loading from "./lotties/Loading";
 import SplashLoading from "./lotties/SplashLoading";
 import AnimatedRoutes from "./util/AnimatedRoutes";
-import { useUserStore } from "./store/data";
 import { checkIP, getIPaddress } from "./api/login/login";
+import { useUserStore } from "./store/data";
 
 function App() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
-  const { id, setId } = useUserStore();
+  const {setUser} = useUserStore()
   const isAdmin = location.pathname.includes('/admin');
   const { data: ipData, isLoading: isIPLoading, isError: isIPError, error: ipError } = useQuery(
     ['getIPaddress'],
@@ -34,7 +34,7 @@ function App() {
     {
       onSuccess: (res) => {
         if(res.id){
-          setId(res.id)
+          setUser(res)
         }
       },
     }

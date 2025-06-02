@@ -16,7 +16,7 @@ interface Props {
 }
 
 const AddPortfolio = ({ isOpen, onClose, projectId }: Props) => {
-    const { id } = useUserStore();
+    const { user } = useUserStore();
     const [summary, setSummary] = useState('');
     const [title, setTitle] = useState('');
     const [start, setStart] = useState('');
@@ -86,7 +86,7 @@ const AddPortfolio = ({ isOpen, onClose, projectId }: Props) => {
     
     
         // API 호출 (주석 해제 시 동작)
-        addProject(id, projectId, type, title, start, end, updatedContent, files).then((res) => {
+        addProject(user.id, projectId, type, title, start, end, updatedContent, files).then((res) => {
             queryClient.invalidateQueries('getProjects', { exact: true });
             onClose();
         });

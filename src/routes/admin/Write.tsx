@@ -8,13 +8,13 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useQuery, useQueryClient } from 'react-query';
 import TopLoading from '../../lotties/TopLoading';
 import { API_URL } from '../../util/server';
-import { useUserStore } from '../../store/data';
 import { getBoardByPid, writeBlogs } from '../../api/board/board';
+import { useUserStore } from '../../store/data';
 
 const Write = () => {
   const { pid } = useParams();
   const navigate = useNavigate();
-  const {id} = useUserStore();
+  const {user} = useUserStore();
   const [summary, setSummary] = useState('');
   const [title, setTitle] = useState('');
   const [files, setFiles] = useState<File[]>([]);
@@ -58,7 +58,7 @@ const Write = () => {
     const updatedContent = doc.body.innerHTML;
     setSummary(updatedContent);
 
-    writeBlogs(id, pid || null, title, descr, tags, updatedContent, files).then((res) => {
+    writeBlogs(user.id, pid || null, title, descr, tags, updatedContent, files).then((res) => {
       queryClient.invalidateQueries('getBoardByPid', { exact: true });
       navigate('/admin/blog');
     });

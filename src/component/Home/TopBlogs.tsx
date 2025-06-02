@@ -3,13 +3,12 @@ import BlogCard from '../Common/BlogCard';
 import { useNavigate } from 'react-router-dom';
 import SkeletonBlogCard from '../Common/SkeletonBlogCard';
 import { useGetBlogs } from '../../api/board/boardHooks';
+import { useBlogStore } from '../../store/data';
 
 const TopBlogs = () => {
     const navigate = useNavigate();
+    const {topBlogs, isTopBlogsLoading} = useBlogStore();
     const blognumber = 5;
-    const {data, isLoading, isError, error} = useGetBlogs('top', 'all');
-    // if (isLoading) return <Loading />;
-    if (isError) throw error;
 
     return (
         <div>
@@ -21,12 +20,12 @@ const TopBlogs = () => {
             </div>
 
             <div className="flex overflow-x-auto gap-2">
-                {isLoading ? (
+                {isTopBlogsLoading ? (
                     Array.from({ length: blognumber }).map((_, index) => (
                         <SkeletonBlogCard key={index} />
                     ))
                 ) : (
-                    data.map((blog:any) => (
+                    topBlogs && topBlogs.map((blog:any) => (
                         <BlogCard key={blog.id} blogData={blog} mode='card'/>
                     ))
                 )}

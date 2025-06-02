@@ -9,10 +9,10 @@ import { useUserStore } from '../../store/data'
 const CommentInput = () => {
     const {bid} = useParams()
     const [comment, setComment] = useState('')
-    const {id} = useUserStore()
+    const {user} = useUserStore()
     const { mutate, isLoading, isError, error } = useAddComment();
     const handlesubmit = () => {
-        mutate({bid: bid || '', content: comment, uid: id || ''})
+        mutate({bid: bid || '', content: comment, uid: user.id || ''})
         setComment('')
     }
 

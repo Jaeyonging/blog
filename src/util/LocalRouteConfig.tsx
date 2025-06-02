@@ -11,6 +11,7 @@ import AdminVisitor from "../routes/admin/AdminVisitor";
 import AdminCode from "../routes/admin/AdminCode";
 import AdminDb from "../routes/admin/AdminDb";
 import AdminComment from "../routes/admin/AdminComment";
+import Login from "../routes/Login";
 
 
 interface RouteConfig {
@@ -25,6 +26,7 @@ export const LocalRouteConfig = {
     { path: '/blog/:bid', element: <Blog /> },
     { path: '/portfolio', element: <Portfolio /> },
     { path: '/visitor', element: <Visitor /> },
+    { path: "/login", element: <Login /> },
   ],
   protected: [
     { path: "/admin/", element: <AdminBlog /> },

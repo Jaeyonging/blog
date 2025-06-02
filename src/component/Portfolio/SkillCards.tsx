@@ -10,6 +10,7 @@ import { useQuery } from 'react-query';
 import { getProjects } from '../../api/board/board';
 import Loading from '../../lotties/Loading';
 import { API_URL } from '../../util/server';
+import { useFetchDataStore } from '../../store/data';
 
 const SkillCards = () => {
   const defaultOptions = {
@@ -21,10 +22,7 @@ const SkillCards = () => {
     },
   };
 
-  const { data, isLoading, isError, error } = useQuery('getProjects', getProjects)
-
-  if (isLoading) return <Loading />
-  if (isError) throw error
+  const { data } = useFetchDataStore();
 
   return (
     <div className='flex flex-col p-4 gap-2'>
@@ -42,13 +40,13 @@ const SkillCards = () => {
 
       <span className='text-[24px] font-bold mt-[20px]'>Timeline</span>
       <div className='border-l-2 border-white gap-3 flex flex-col bg-cardcolor p-2 py-3 rounded-[10px]'>
-        {data&&data.portfolio.map((item: any) => (
+        {data && data.portfolio && data.portfolio.map((item: any) => (
           <TimeLine projectData={item} key={item.id}/>
         ))}
       </div>
       <span className='text-[24px] font-bold mt-[20px]'>Projects</span>
       <div className='flex flex-wrap items-center gap-2'>
-        {data && data.project.map((item: any) => (
+        {data && data.projects && data.projects.map((item: any) => (
           <ProjectCard pid={item.id} title={item.name} imgurl={API_URL + "/" + item.file.file_path} year={item.start_date + ' ~ ' + item.end_date} key={item.id} />
         ))}
       </div>
