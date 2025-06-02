@@ -23,10 +23,10 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   if(isLoading) return <SplashLoading/>
   if(isError) throw error;
 
-  if(data.result){
+  if(data&& data.result){
     return <>{children}</>;
   }
-  return <Navigate to="/" replace />;
+  return <Navigate to="/login" replace />;
 };
 
 export default ProtectedRoute;

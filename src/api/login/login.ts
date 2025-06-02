@@ -18,3 +18,10 @@ export const getIPaddress = async() => {
     const response = axios.get('https://api.ipify.org?format=json')
     return response
 }
+
+export const loginID = async(email: string, password: string) => {
+    const response = await axios.post(`${API_URL}/loginID`, {
+        email, password
+    });
+    return response.data;
+}
