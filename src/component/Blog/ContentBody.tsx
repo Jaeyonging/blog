@@ -1,14 +1,15 @@
 import React from 'react'
 import { decodeEntities } from '../../util/util'
+import ReactQuill from 'react-quill';
 
-interface Props{
+interface Props {
     content: string;
 }
 
-const ContentBody = ({content}: Props) => {
+const ContentBody = ({ content }: Props) => {
     return (
         <div className='min-h-[70vh] p-2'>
-            <div dangerouslySetInnerHTML={{ __html: decodeEntities(content) }} />
+            <ReactQuill value={content} readOnly={true} theme="bubble" />
         </div>
     )
 }

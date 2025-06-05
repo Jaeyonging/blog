@@ -46,7 +46,7 @@ const SkillCards = () => {
       </div>
       <span className='text-[24px] font-bold mt-[20px]'>Projects</span>
       <div className='flex flex-wrap items-center gap-2'>
-        {data && data.projects && data.projects.map((item: any) => (
+        {data && data.project && data.project.map((item: any) => (
           <ProjectCard pid={item.id} title={item.name} imgurl={API_URL + "/" + item.file.file_path} year={item.start_date + ' ~ ' + item.end_date} key={item.id} />
         ))}
       </div>

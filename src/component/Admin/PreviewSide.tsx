@@ -1,5 +1,6 @@
 import React from 'react'
 import { decodeEntities } from '../../util/util'
+import ReactQuill from 'react-quill'
 
 interface Props {
     summary: string
@@ -8,7 +9,8 @@ interface Props {
 const PreviewSide = ({ summary }: Props) => {
     return (
         <div className='ql-editor'>
-            <div dangerouslySetInnerHTML={{ __html: decodeEntities(summary) }} />
+            <ReactQuill value={summary} readOnly={true} theme="bubble" />
+            {/* <div dangerouslySetInnerHTML={{ __html: decodeEntities(summary) }} /> */}
         </div>
     )
 }
