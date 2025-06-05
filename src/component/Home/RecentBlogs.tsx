@@ -8,7 +8,6 @@ import { useBlogStore } from '../../store/data';
 const RecentBlogs = () => {
     const navigate = useNavigate()
     const {recentBlogs, isRecentBlogsLoading} = useBlogStore();
-    console.log(recentBlogs);
     return (
         <div>
             <div className='flex justify-between items-center'>

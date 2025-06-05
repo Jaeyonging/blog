@@ -24,6 +24,17 @@ const useUserStore = create<UserState>((set) => ({
     resetUser: () => set({ user: null }),
 }));
 
+interface AdminState{
+    admin: string;
+    setAdmin: (newAdmin: string) => void;
+    resetAdmin: () => void;
+}
+
+const useAdminStore = create<AdminState>((set) => ({
+    admin: '',
+    setAdmin: (newAdmin) => set({ admin: newAdmin }),
+    resetAdmin: () => set({ admin: '' }),
+}));
 
 interface BlogState{
     topBlogs: any;
@@ -90,4 +101,4 @@ const useVisitLogStore = create<VisitLogState>((set) => ({
     resetVisitLogs: () => set({ visitLogs: null }),
 }));
 
-export { useFetchDataStore, useUserStore, useBlogStore, useCodeStore, useVisitLogStore };
+export { useFetchDataStore, useUserStore, useBlogStore, useCodeStore, useVisitLogStore, useAdminStore };

@@ -8,11 +8,9 @@ interface Props {
 
 const CommentCard = ({ commentData }: Props) => {
     const queryClient = useQueryClient()
-    console.log(commentData)
     const handleDelete = () => {
         if(confirm('정말 삭제하시겠습니까?')){
             deleteComment(commentData.comment_id).then((res)=>{
-                console.log(res)
                 queryClient.invalidateQueries('getComments')
             })
         }

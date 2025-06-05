@@ -1,4 +1,7 @@
 import React from 'react'
+import { doLogin } from '../../api/user/user'
+import { useNavigate } from 'react-router-dom'
+import { useAdminStore } from '../../store/data'
 
 interface Props{
     email: string
@@ -6,8 +9,17 @@ interface Props{
 }
 
 const LoginButton = ({email, password}: Props) => {
+    const {setAdmin} = useAdminStore()
+    const navigate = useNavigate()
     const handleLogin = () => {
-        console.log('login', email, password)
+        doLogin(email, password).then((res) => {
+            if(res.result){
+                setAdmin(res.user.id)
+                navigate('/admin')
+            }
+        }).catch((err) => {
+            console.log(err)
+        })
     }
 
     return (
