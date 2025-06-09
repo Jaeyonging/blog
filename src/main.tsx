@@ -17,7 +17,7 @@ const queryClient = new QueryClient({
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <GlobalErrorBoundary>
-      <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+      <BrowserRouter>
         <QueryClientProvider client={queryClient}>
           <App />
         </QueryClientProvider>

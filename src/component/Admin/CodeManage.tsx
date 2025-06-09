@@ -4,19 +4,16 @@ import { useQuery } from 'react-query';
 import { getCode } from '../../api/code/code';
 import Loading from '../../lotties/Loading';
 import CodeCard from './CodeCard';
+import { useCodeStore } from '../../store/data';
 
 const CodeManage = () => {
+  const {codes} = useCodeStore();
   const [isPopupOpen, setPopupOpen] = useState(false);
   const handlePopup = () => {
     setPopupOpen(!isPopupOpen);
   };
 
-  const { data, isLoading, isError, error } = useQuery(['getCode'], getCode);
-
-  if (isLoading) return <Loading />;
-  if (isError) throw error;
-
-  const groupedData = (data?.results || []).reduce((acc: any, item: any) => {
+  const groupedData = (codes?.results || []).reduce((acc: any, item: any) => {
     if (!acc[item.tag]) {
       acc[item.tag] = [];
     }

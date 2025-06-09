@@ -374,6 +374,13 @@
 .ql-editor .ql-size-huge {
   font-size: 2.5em;
 }
+
+.ql-editor .ql-size-big {
+  font-size: 3em;
+}
+
+
+
 .ql-editor .ql-direction-rtl {
   direction: rtl;
   text-align: inherit;
@@ -833,7 +840,12 @@
 .ql-snow .ql-picker.ql-size .ql-picker-label[data-value='18px']::before,
 .ql-snow .ql-picker.ql-size .ql-picker-item[data-value='18px']::before {
   content: 'Huge';
-  font-size: 18px;
+  font-size: 20px;
+}
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value='20px']::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value='20px']::before {
+  content: 'Big';
+  font-size: 20px;
 }
 .ql-snow .ql-picker.ql-size .ql-picker-item[data-value='14px']::before {
   font-size: 14px;

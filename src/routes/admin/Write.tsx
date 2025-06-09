@@ -94,13 +94,9 @@ const Write = () => {
         ))}
       </div>
 
-      <div className="flex flex-1 gap-2 overflow-hidden">
-        <div className="w-1/2 h-full overflow-auto border border-gray-300 rounded-md">
+      <div className="flex overflow-hidden">
+        <div className="w-full h-full overflow-auto border border-gray-300 rounded-md">
           <CustomReactQuill value={summary} onChange={setSummary} setFiles={setFiles} />
-        </div>
-
-        <div className="w-1/2 h-full overflow-auto border border-gray-300 rounded-md">
-          <PreviewSide summary={summary} />
         </div>
       </div>
 

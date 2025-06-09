@@ -85,9 +85,8 @@ const AddPortfolio = ({ isOpen, onClose, projectId }: Props) => {
         setSummary(updatedContent);
     
     
-        // API 호출 (주석 해제 시 동작)
         addProject(user.id, projectId, type, title, start, end, updatedContent, files).then((res) => {
-            queryClient.invalidateQueries('getProjects', { exact: true });
+            queryClient.invalidateQueries('getProjects');
             onClose();
         });
     };
@@ -102,12 +101,12 @@ const AddPortfolio = ({ isOpen, onClose, projectId }: Props) => {
             </select>
             <div>
                 <span>프로젝트 {projectId ? '수정' : '등록'}</span>
-                <input value={title} onChange={(e) => setTitle(e.target.value)} />
+                <input className='border-2 border-black' value={title} onChange={(e) => setTitle(e.target.value)} />
             </div>
             <div>
                 <span>시작시간 등록</span>
-                <input type="text" value={start} onChange={(e) => setStart(e.target.value)} /> ~
-                <input type="text" value={end} onChange={(e) => setEnd(e.target.value)} />
+                <input type="text" className='border-2 border-black' value={start} onChange={(e) => setStart(e.target.value)} /> ~
+                <input type="text" className='border-2 border-black' value={end} onChange={(e) => setEnd(e.target.value)} />
             </div>
             <span>프로젝트 설명</span>
             <div className="bg-[black] text-white">

@@ -7,7 +7,6 @@ const DbManage = () => {
     const { mutate, isLoading, error } = useGetDb();
     const handleDownload = () => {
         mutate();
-
     }
 
     if (isLoading) return <TopLoading />;

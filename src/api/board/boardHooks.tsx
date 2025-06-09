@@ -1,6 +1,6 @@
 
 import { useQuery } from "react-query";
-import { getBlogs, getBoardById, getBoardByPid, getProjects, getVisitBoard } from "./board";
+import { getBlogs, getBoardById, getBoardByPid, getComments, getProjects, getVisitBoard } from "./board";
 import { useBlogStore, useFetchDataStore } from "../../store/data";
 import { useEffect } from "react";
 import Loading from "../../lotties/Loading";
@@ -131,6 +131,27 @@ export const BlogFetcher = ({children}:{children:React.ReactNode}) => {
 
     if(isLoading) return <Loading />;
     if(isError) throw error;
+
+    return <>{data && children}</>
+}
+
+export const CommentFetcher = ({children}:{children:React.ReactNode}) => {
+    const { setData } = useFetchDataStore();
+    const { data, isLoading, isError, error } = useQuery('getComments', getComments,{
+        useErrorBoundary: true
+    })
+
+    useEffect(()=>{
+        if(data){
+            setData(data);
+        }
+        return () => {
+            setData(null);
+        }
+    },[data])
+
+    if(isLoading) return <Loading/>
+    if(isError) throw error
 
     return <>{data && children}</>
 }

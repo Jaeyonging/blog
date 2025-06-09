@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 interface FetchDataState {
     data: any;
@@ -24,6 +25,31 @@ const useUserStore = create<UserState>((set) => ({
     resetUser: () => set({ user: null }),
 }));
 
+interface AdminState{
+    admin: string;
+    setAdmin: (newAdmin: string) => void;
+    resetAdmin: () => void;
+}
+
+
+interface AdminState {
+    admin: string;
+    setAdmin: (newAdmin: string) => void;
+    resetAdmin: () => void;
+}
+
+const useAdminStore = create<AdminState>()(
+    persist(
+        (set) => ({
+            admin: '',
+            setAdmin: (newAdmin) => set({ admin: newAdmin }),
+            resetAdmin: () => set({ admin: '' }),
+        }),
+        {
+            name: 'admin-storage', // localStorage 키 이름
+        }
+    )
+);
 
 interface BlogState{
     topBlogs: any;
@@ -90,4 +116,4 @@ const useVisitLogStore = create<VisitLogState>((set) => ({
     resetVisitLogs: () => set({ visitLogs: null }),
 }));
 
-export { useFetchDataStore, useUserStore, useBlogStore, useCodeStore, useVisitLogStore };
+export { useFetchDataStore, useUserStore, useBlogStore, useCodeStore, useVisitLogStore, useAdminStore };

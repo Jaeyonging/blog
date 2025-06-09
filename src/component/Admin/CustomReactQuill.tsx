@@ -19,13 +19,13 @@ const CustomReactQuill = forwardRef(({ value, onChange, className, setFiles }: P
   const quillRef = useRef<ReactQuill | null>(null);
 
   const toolbarOptions = [
-    [{ size: ['14px', '16px', '18px'] }],
+    [{ size: ['14px', '16px', '18px', '20px'] }],
     ['bold', 'italic', 'underline', 'strike'],
     [{ color: [] }, { background: [] }],
     [{ align: [] }],
     [{ list: 'ordered' }, { list: 'bullet' }],
     ['code-block'],
-    ['image'],
+    ['image', 'link'], // 🔥 여기에 'link' 추가
   ];
 
   const formats = [
