@@ -1,42 +1,45 @@
-import { lazy, Suspense } from "react";
-import Home from "../routes/Home";
-import Blogs from "../routes/Blogs";
-import Blog from "../routes/Blog";
-import Portfolio from "../routes/Portfolio";
-import Visitor from "../routes/Visitor";
-import Write from "../routes/admin/Write";
-import AdminBlog from "../routes/admin/AdminBlog";
-import AdminPortfolio from "../routes/admin/AdminPortfolio";
-import AdminVisitor from "../routes/admin/AdminVisitor";
-import AdminCode from "../routes/admin/AdminCode";
-import AdminDb from "../routes/admin/AdminDb";
-import AdminComment from "../routes/admin/AdminComment";
-import Login from "../routes/Login";
+import { lazy } from "react";
+
+const Home = lazy(() => import("../routes/Home"));
+const Blogs = lazy(() => import("../routes/Blogs"));
+const Blog = lazy(() => import("../routes/Blog"));
+const Portfolio = lazy(() => import("../routes/Portfolio"));
+const Visitor = lazy(() => import("../routes/Visitor"));
+const Login = lazy(() => import("../routes/Login"));
+
+// Admin Routes
+const AdminBlog = lazy(() => import("../routes/admin/AdminBlog"));
+const AdminComment = lazy(() => import("../routes/admin/AdminComment"));
+const AdminPortfolio = lazy(() => import("../routes/admin/AdminPortfolio"));
+const AdminDb = lazy(() => import("../routes/admin/AdminDb"));
+const AdminVisitor = lazy(() => import("../routes/admin/AdminVisitor"));
+const AdminCode = lazy(() => import("../routes/admin/AdminCode"));
+const Write = lazy(() => import("../routes/admin/Write"));
 
 
 interface RouteConfig {
   path: string;
-  element: JSX.Element;
+  component: React.LazyExoticComponent<React.ComponentType>;
 }
 
 export const LocalRouteConfig = {
   public: [
-    { path: "/", element: <Home /> },
-    { path: '/blogs', element: <Blogs /> },
-    { path: '/blog/:bid', element: <Blog /> },
-    { path: '/portfolio', element: <Portfolio /> },
-    { path: '/visitor', element: <Visitor /> },
-    { path: "/login", element: <Login /> },
+    { path: "/", component: <Home /> },
+    { path: '/blogs', component: <Blogs /> },
+    { path: '/blog/:bid', component: <Blog /> },
+    { path: '/portfolio', component: <Portfolio /> },
+    { path: '/visitor', component: <Visitor /> },
+    { path: "/login", component: <Login /> },
   ],
   protected: [
-    { path: "/admin/", element: <AdminBlog /> },
-    { path: "/admin/comment", element: <AdminComment /> },
-    { path: "/admin/blog", element: <AdminBlog /> },
-    { path: "/admin/portfolio", element: <AdminPortfolio /> },
-    { path: "/admin/db", element: <AdminDb /> },
-    { path: "/admin/visitor", element: <AdminVisitor /> },
-    { path: "/admin/code", element: <AdminCode /> },
-    { path: "/admin/write/:pid?", element: <Write /> },
+    { path: "/admin/", component: <AdminBlog /> },
+    { path: "/admin/comment", component: <AdminComment /> },
+    { path: "/admin/blog", component: <AdminBlog /> },
+    { path: "/admin/portfolio", component: <AdminPortfolio /> },
+    { path: "/admin/db", component: <AdminDb /> },
+    { path: "/admin/visitor", component: <AdminVisitor /> },
+    { path: "/admin/code", component: <AdminCode /> },
+    { path: "/admin/write/:pid?", component: <Write /> },
   ],
 
   admin: [] as RouteConfig[],

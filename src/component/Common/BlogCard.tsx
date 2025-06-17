@@ -39,7 +39,7 @@ const BlogCard = ({ blogData, mode = 'card', width, height }: Props) => {
                 <div className='flex w-full h-[150px] border-2 border-[#ffffff33] rounded-md overflow-hidden'>
                     {
                         blogData.files[0].path ? (
-                            <img src={`${API_URL}/${blogData.files[0].path}`} alt={blogData.title} className='object-cover w-full h-full' />
+                            <img src={`${API_URL}/${blogData.files[0].path}`} alt={blogData.title} className='object-cover w-full h-full' loading='lazy' width={250} height={150} />
                         ) : (
                             <div className='flex justify-center items-center w-full h-full'>
                                 <span className='text-[12px] text-gray-300'>이미지가 없습니다.</span>
