@@ -29,7 +29,7 @@ const Topbar = () => {
     };
 
     return (
-        <div className={`shadow-lg fixed top-0 left-0 w-full h-[60px] flex items-center justify-between px-4 text-[24px] bg-transparent z-20 transition-opacity duration-300 ease-in-out ${isScrolling ? 'opacity-0' : 'opacity-100'}`}>
+        <div className={`hidden shadow-lg fixed top-0 left-0 w-full h-[60px] sm:flex md:flex items-center justify-between px-4 text-[24px] bg-transparent z-20 transition-opacity duration-300 ease-in-out ${isScrolling ? 'opacity-0' : 'opacity-100'}`}>
             <div className="absolute top-0 left-0 w-full h-full z-0 pointer-events-none ">
                 <Lottie options={defaultOptions} height={'100%'} width={'100%'} />
             </div>

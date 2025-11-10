@@ -13,18 +13,19 @@ import SplashLoading from "./lotties/SplashLoading";
 import AnimatedRoutes from "./util/AnimatedRoutes";
 import { checkIP, getIPaddress } from "./api/login/login";
 import { useUserStore } from "./store/data";
+import PreView from "./component/Home/PreView";
 
 function App() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
-  const {setUser} = useUserStore()
+  const { setUser } = useUserStore()
   const isAdmin = location.pathname.includes('/admin');
   const { data: ipData, isLoading: isIPLoading, isError: isIPError, error: ipError } = useQuery(
     ['getIPaddress'],
     getIPaddress,
     {
       onSuccess: (res) => {
-        mutate(res.data.ip); 
+        mutate(res.data.ip);
       },
     }
   );
@@ -33,7 +34,7 @@ function App() {
     (ip: string) => checkIP(ip),
     {
       onSuccess: (res) => {
-        if(res.id){
+        if (res.id) {
           setUser(res)
         }
       },
@@ -44,14 +45,17 @@ function App() {
 
   return (
     <>
-      {!isAdmin ? <Topbar/> : <SideMenu />}
-        <Suspense fallback={<SplashLoading />}>
-          <ScrollToTop scrollContainerRef={scrollContainerRef} />
-          <div ref={scrollContainerRef} className={`${!isAdmin ? 'pt-[60px] overflow-y-auto h-[calc(100vh-60px)]' : 'pl-[150px]'} text-white`}>
+      <div className="flex relative h-[100vh] w-[100vw] justify-center overflow-hidden gap-[100px] bg-cardcolor">
+        {!isAdmin && <PreView />}
+        {!isAdmin ? <Topbar /> : <SideMenu />}
+        <div ref={scrollContainerRef} className={`overflow-y-auto sm:pt-[60px] md:pt-[60px] sm:pb-[60px] md:pb-[60px] min-w-[450px] max-w-[450px] relative sm:w-[100%] sm:min-w-[100%] md:w-[100%] md:min-w-[100%] shadow-xl bg-[#1d202a] ${isAdmin ? 'w-[100%] min-w-full max-w-full flex' : 'text-white'}`}>
+          <Suspense fallback={<SplashLoading />}>
+            <ScrollToTop scrollContainerRef={scrollContainerRef} />
             <AnimatedRoutes />
-          </div>
-        </Suspense>
-      {!isAdmin && <BottomBar />}
+          </Suspense>
+        </div>
+        {!isAdmin && <BottomBar />}
+      </div>
     </>
   );
 }
