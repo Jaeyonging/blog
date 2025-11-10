@@ -4,8 +4,6 @@ import { AiFillLike } from "react-icons/ai";
 import { FaComment } from "react-icons/fa";
 import { MdOutlineVisibility } from "react-icons/md";
 import { API_URL } from '../../util/server';
-import { deleteBlogById } from '../../api/board/board';
-import { useQueryClient } from 'react-query';
 interface Props {
     blogData: any;
     mode?: string;
@@ -16,16 +14,12 @@ interface Props {
 const BlogCard = ({ blogData, mode = 'card', width, height }: Props) => {
     const navigate = useNavigate();
     const location = useLocation();
-    const queryClient = useQueryClient();
     const handleClick = () => {
         navigate(`/blog/${blogData.id}`);
     }
 
-    const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.stopPropagation();
-        deleteBlogById(blogData.id).then(() => {
-            queryClient.invalidateQueries(['getBlogs']);
-        })
+    const handleDelete = () => {
+        console.log('삭제');
     }
 
     const handleEdit = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -39,7 +33,7 @@ const BlogCard = ({ blogData, mode = 'card', width, height }: Props) => {
                 <div className='flex w-full h-[150px] border-2 border-[#ffffff33] rounded-md overflow-hidden'>
                     {
                         blogData.files[0].path ? (
-                            <img src={`${API_URL}/${blogData.files[0].path}`} alt={blogData.title} className='object-cover' decoding='async' width={250} height={150} />
+                            <img src={`${API_URL}/${blogData.files[0].path}`} alt={blogData.title} className='object-cover w-full h-full' />
                         ) : (
                             <div className='flex justify-center items-center w-full h-full'>
                                 <span className='text-[12px] text-gray-300'>이미지가 없습니다.</span>

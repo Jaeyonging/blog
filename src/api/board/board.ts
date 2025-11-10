@@ -118,8 +118,3 @@ export const writeVisit = async(uid: string, message: string) => {
   const response = await axios.post(`${API_URL}/writeVisit`, {uid, message});
   return response.data;
 }
-
-export const deleteBlogById = async(bid: string) =>{
-  const response = await axios.post(`${API_URL}/deleteBlogById`, {bid});
-  return response.data;
-}

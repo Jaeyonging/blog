@@ -65,7 +65,7 @@ const BlogLists = () => {
                 </div>
             )
                 : (
-                    <div className='flex flex-col flex-wrap gap-2 lg:flex-row justify-start'>
+                    <div className='flex flex-col flex-wrap gap-2 lg:flex-row justify-evenly'>
                         {filteredAndSortedData.length > 0 && filteredAndSortedData.map((blog: any) => (
                             <div className='w-full lg:w-[250px]' key={blog.id}>
                                 <BlogCard

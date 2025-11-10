@@ -11,7 +11,7 @@ const AnimatedRoutes = () => {
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           {/* Public Routes */}
-          {LocalRouteConfig.public.map(({ path, component }) => (
+          {LocalRouteConfig.public.map(({ path, element }) => (
             <Route
               key={path}
               path={path}
@@ -22,14 +22,14 @@ const AnimatedRoutes = () => {
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  {component}
+                  {element}
                 </motion.div>
               }
             />
           ))}
 
           {/* Protected Routes */}
-          {LocalRouteConfig.protected.map(({ path, component }) => (
+          {LocalRouteConfig.protected.map(({ path, element }) => (
             <Route
               key={path}
               path={path}
@@ -41,7 +41,7 @@ const AnimatedRoutes = () => {
                     exit={{ opacity: 0, }}
                     transition={{ duration: 0.3 }}
                   >
-                    {component}
+                    {element}
                   </motion.div>
                 </ProtectedRoute>
               }
