@@ -14,7 +14,7 @@ const PreView = () => {
                 </p>
                 <div className="flex gap-4 flex-wrap">
                     <HomeButton title="GitHub" img={<FaGithub size={20} />} url="https://github.com/jaeyonging" />
-                    <HomeButton title="Blog" img={<FaUserCircle size={20} />} url="http://jaeyonging.com" />
+                    <HomeButton title="Game" img={<FaUserCircle size={20} />} url="http://game.jaeyonging.com" />
                     <HomeButton title="Portfolio" img={<RiNotionFill size={20} />} url="https://cerulean-molecule-f4d.notion.site/1ae79be98cd280ba8eceef74b5ea2ded?pvs=4" />
                 </div>
             </div>
