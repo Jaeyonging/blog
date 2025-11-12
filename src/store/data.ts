@@ -25,13 +25,6 @@ const useUserStore = create<UserState>((set) => ({
     resetUser: () => set({ user: null }),
 }));
 
-interface AdminState{
-    admin: string;
-    setAdmin: (newAdmin: string) => void;
-    resetAdmin: () => void;
-}
-
-
 interface AdminState {
     admin: string;
     setAdmin: (newAdmin: string) => void;
