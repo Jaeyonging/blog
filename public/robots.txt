@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://jaeyonging.com/sitemap.xml
+Sitemap: https://blog.jaeyonging.com/sitemap.xml
+
+# Disallow admin pages
+Disallow: /admin
+Disallow: /login
