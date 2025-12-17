@@ -43,7 +43,7 @@ const BlogCard = ({ blogData, mode = 'card', width, height }: Props) => {
                 </div>
             )}
             <div className='flex flex-col gap-2 mt-[10px]'>
-                <span className='text-[16px] font-bold text-white truncate'>{blogData.title}</span>
+                <span className='text-[16px] font-bold text-white line-clamp-2 break-keep text-center'>{blogData.title}</span>
                 {
                     blogData.descr ? (
                         <span className='text-[12px] text-gray-300 truncate'>{blogData.descr}</span>

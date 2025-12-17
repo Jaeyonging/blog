@@ -8,7 +8,7 @@ interface Props {
 
 const ContentBody = ({ content }: Props) => {
     return (
-        <div className='min-h-[70vh] p-2'>
+        <div className='min-h-[70vh] p-2 max-w-[768px] mx-auto'>
             <ReactQuill value={content} readOnly={true} theme="bubble" />
         </div>
     )
