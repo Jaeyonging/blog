@@ -25,7 +25,7 @@ const CustomReactQuill = forwardRef(({ value, onChange, className, setFiles }: P
     [{ align: [] }],
     [{ list: 'ordered' }, { list: 'bullet' }],
     ['code-block'],
-    ['image', 'link'], // 🔥 여기에 'link' 추가
+    ['image', 'link'],
   ];
 
   const formats = [

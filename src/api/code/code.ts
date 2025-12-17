@@ -21,6 +21,27 @@ export const getCodeByTag = async (tag: string) => {
     return response.data;
 }
 
+export const updateCode = async (id: string, name: string, tag: string, ext: string) => {
+    const response = await axios.post(`${API_URL}/updateCode`, {
+        id, name, tag, ext
+    });
+    return response.data;
+}
+
+export const deleteCode = async (id: string) => {
+    const response = await axios.post(`${API_URL}/deleteCode`, {
+        id
+    });
+    return response.data;
+}
+
+export const getBlogsByTagId = async (tagId: string) => {
+    const response = await axios.post(`${API_URL}/getBlogsByTagId`, {
+        tagId
+    });
+    return response.data;
+}
+
 const getDb = async () => {
     const response = await axios.get(`${API_URL}/getDb`);
     return response.data;

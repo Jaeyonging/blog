@@ -1,6 +1,6 @@
 
 import { useQuery } from "react-query";
-import { getBlogs, getBoardById, getBoardByPid, getComments, getProjects, getVisitBoard } from "./board";
+import { getBlogs, getBoardById, getBoardByPid, getComments, getProjects, getVisitBoard, getVisitLogs, getVisitLog } from "./board";
 import { useBlogStore, useFetchDataStore } from "../../store/data";
 import { useEffect } from "react";
 import Loading from "../../lotties/Loading";

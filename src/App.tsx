@@ -17,14 +17,14 @@ import { useUserStore } from "./store/data";
 function App() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
-  const {setUser} = useUserStore()
+  const { setUser } = useUserStore()
   const isAdmin = location.pathname.includes('/admin');
   const { data: ipData, isLoading: isIPLoading, isError: isIPError, error: ipError } = useQuery(
     ['getIPaddress'],
     getIPaddress,
     {
       onSuccess: (res) => {
-        mutate(res.data.ip); 
+        mutate(res.data.ip);
       },
     }
   );
@@ -33,7 +33,7 @@ function App() {
     (ip: string) => checkIP(ip),
     {
       onSuccess: (res) => {
-        if(res.id){
+        if (res.id) {
           setUser(res)
         }
       },
@@ -44,13 +44,13 @@ function App() {
 
   return (
     <>
-      {!isAdmin ? <Topbar/> : <SideMenu />}
-        <Suspense fallback={<SplashLoading />}>
-          <ScrollToTop scrollContainerRef={scrollContainerRef} />
-          <div ref={scrollContainerRef} className={`${!isAdmin ? 'pt-[60px] overflow-y-auto h-[calc(100vh-60px)]' : 'pl-[150px]'} text-white`}>
-            <AnimatedRoutes />
-          </div>
-        </Suspense>
+      {!isAdmin ? <Topbar /> : <SideMenu />}
+      <Suspense fallback={<SplashLoading />}>
+        <ScrollToTop scrollContainerRef={scrollContainerRef} />
+        <div ref={scrollContainerRef} className={`${!isAdmin ? 'pt-[60px] overflow-y-auto h-[calc(100vh-60px)]' : 'pl-[150px]'} text-white`}>
+          <AnimatedRoutes />
+        </div>
+      </Suspense>
       {!isAdmin && <BottomBar />}
     </>
   );

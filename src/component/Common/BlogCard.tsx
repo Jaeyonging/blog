@@ -4,6 +4,8 @@ import { AiFillLike } from "react-icons/ai";
 import { FaComment } from "react-icons/fa";
 import { MdOutlineVisibility } from "react-icons/md";
 import { API_URL } from '../../util/server';
+import { deleteBlogById } from '../../api/board/board';
+import { useQueryClient } from 'react-query';
 interface Props {
     blogData: any;
     mode?: string;
@@ -14,12 +16,26 @@ interface Props {
 const BlogCard = ({ blogData, mode = 'card', width, height }: Props) => {
     const navigate = useNavigate();
     const location = useLocation();
+    const queryClient = useQueryClient();
+    
     const handleClick = () => {
-        navigate(`/blog/${blogData.id}`);
+        if (!location.pathname.includes('/admin')) {
+            navigate(`/blog/${blogData.id}`);
+        }
     }
 
-    const handleDelete = () => {
-        console.log('삭제');
+    const handleDelete = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.stopPropagation();
+        if (confirm('정말 삭제하시겠습니까?')) {
+            try {
+                await deleteBlogById(blogData.id);
+                queryClient.invalidateQueries('getBlogs');
+                alert('블로그가 삭제되었습니다.');
+            } catch (error) {
+                console.error('삭제 실패:', error);
+                alert('삭제 중 오류가 발생했습니다.');
+            }
+        }
     }
 
     const handleEdit = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -32,7 +48,7 @@ const BlogCard = ({ blogData, mode = 'card', width, height }: Props) => {
             {mode === 'card' && (
                 <div className='flex w-full h-[150px] border-2 border-[#ffffff33] rounded-md overflow-hidden'>
                     {
-                        blogData.files[0].path ? (
+                        blogData.files && blogData.files.length > 0 && blogData.files[0].path ? (
                             <img src={`${API_URL}/${blogData.files[0].path}`} alt={blogData.title} className='object-cover w-full h-full' />
                         ) : (
                             <div className='flex justify-center items-center w-full h-full'>
@@ -67,7 +83,7 @@ const BlogCard = ({ blogData, mode = 'card', width, height }: Props) => {
                     </div>
                 </div>
             </div>
-            {location.pathname.includes('/admin') && <div className='options'>
+            {location.pathname.includes('/admin') && <div className='options' onClick={(e) => e.stopPropagation()}>
                 <button className='bg-[red] p-2 rounded-[5px]' onClick={handleDelete}>삭제</button>
                 <button className='bg-[yellow] text-black p-2 rounded-[5px]' onClick={handleEdit}>수정</button>
             </div>}

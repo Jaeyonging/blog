@@ -9,16 +9,15 @@ const CategoryCard = ({ title }: Props) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedCategory = searchParams.get('tag');
 
-  // 다크 테마에 어울리는 텍스트 색상
   const colorPairs = [
-    { text: 'text-emerald-400' },  // 청록색
-    { text: 'text-sky-400' },      // 밝은 파랑
-    { text: 'text-violet-400' },   // 보라색
-    { text: 'text-rose-400' },     // 장미색
-    { text: 'text-lime-400' },     // 라임색
-    { text: 'text-orange-400' },   // 주황색
-    { text: 'text-amber-400' },    // 황금색
-    { text: 'text-teal-400' },     // 청록색
+    { text: 'text-emerald-400' }, 
+    { text: 'text-sky-400' },      
+    { text: 'text-violet-400' },   
+    { text: 'text-rose-400' },     
+    { text: 'text-lime-400' },    
+    { text: 'text-orange-400' },  
+    { text: 'text-amber-400' },    
+    { text: 'text-teal-400' },     
   ];
 
   const randomColor = useMemo(() => {

@@ -27,6 +27,15 @@ export const GetCodeFetcher = ({ children }: { children: React.ReactNode }) => {
     const {setCodes,resetCodes} = useCodeStore();
     const { data, isLoading, isError, error } = useQuery(['getCode'], getCode);
 
+    useEffect(() => {
+        if (data) {
+            setCodes(data);
+        }
+        return () => {
+            resetCodes();
+        }
+    }, [data])
+
     if (isLoading) return <Loading />;
     if (isError) throw error;
 

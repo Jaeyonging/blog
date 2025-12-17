@@ -104,8 +104,18 @@ export const getBoardByPid = async(pid: string) => {
   return response.data;
 }
 
+export const deleteProjectById = async(pid: string) => {
+  const response = await axios.post(`${API_URL}/deleteProjectById`, {pid});
+  return response.data;
+}
+
 export const deleteComment = async(id: string) => {
   const response = await axios.post(`${API_URL}/deleteComment`, {id});
+  return response.data;
+}
+
+export const updateComment = async(id: string, content: string) => {
+  const response = await axios.post(`${API_URL}/updateComment`, {id, content});
   return response.data;
 }
 
@@ -116,5 +126,25 @@ export const getVisitBoard = async() => {
 
 export const writeVisit = async(uid: string, message: string) => {
   const response = await axios.post(`${API_URL}/writeVisit`, {uid, message});
+  return response.data;
+}
+
+export const deleteVisit = async(id: string) => {
+  const response = await axios.post(`${API_URL}/deleteVisit`, {id});
+  return response.data;
+}
+
+export const getVisitLogs = async() => {
+  const response = await axios.get(`${API_URL}/getVisitLogs`);
+  return response.data;
+}
+
+export const getVisitLog = async() => {
+  const response = await axios.get(`${API_URL}/getVisitLog`);
+  return response.data;
+}
+
+export const deleteBlogById = async(bid: string) => {
+  const response = await axios.post(`${API_URL}/deleteBlogById`, {bid});
   return response.data;
 }

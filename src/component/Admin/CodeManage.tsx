@@ -24,11 +24,27 @@ const CodeManage = () => {
 
   return (
     <>
-      <div className='flex flex-col p-2'>
-        <button className='border-[1px] rounded-[10px] gap-2 cursor-pointer py-3 w-[80%] ml-[10%] hover:bg-gray-200 hover:text-black' onClick={handlePopup}>코드 추가</button>
-        {groupedData && Object.keys(groupedData).map((tag) => (
-          <CodeCard key={tag} groupedData={groupedData} tag={tag} />
-        ))}
+      <div className='flex flex-col p-4 gap-4'>
+        <div className='flex items-center justify-between mb-4'>
+          <h1 className='text-2xl font-bold text-white'>코드 관리</h1>
+          <button 
+            className='bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-3 rounded-lg font-semibold transition-all shadow-lg hover:shadow-xl' 
+            onClick={handlePopup}
+          >
+            + 코드 추가
+          </button>
+        </div>
+        
+        {groupedData && Object.keys(groupedData).length > 0 ? (
+          Object.keys(groupedData).map((tag) => (
+            <CodeCard key={tag} groupedData={groupedData} tag={tag} />
+          ))
+        ) : (
+          <div className='text-center py-12 text-gray-400'>
+            <p className='text-lg'>등록된 코드가 없습니다.</p>
+            <p className='text-sm mt-2'>위의 "코드 추가" 버튼을 클릭하여 코드를 추가하세요.</p>
+          </div>
+        )}
       </div>
 
       <CodePopup isOpen={isPopupOpen} onClose={handlePopup} />

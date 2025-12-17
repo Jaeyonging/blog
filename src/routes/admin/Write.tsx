@@ -43,15 +43,17 @@ const Write = () => {
     const doc = parser.parseFromString(summary, 'text/html');
     const images = doc.querySelectorAll('img');
 
-    images.forEach((img, index) => {
+    let newFileIndex = 0;
+    images.forEach((img) => {
         const currentSrc = img.getAttribute('src');
 
         if (currentSrc?.startsWith('http') || currentSrc?.startsWith(API_URL)) {
             return;
         }
 
-        if (files[index]) {
-            img.setAttribute('src', `image${index + 1}`);
+        if (files[newFileIndex]) {
+            img.setAttribute('src', `image${newFileIndex + 1}`);
+            newFileIndex++;
         }
     });
 
