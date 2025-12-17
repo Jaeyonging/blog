@@ -10,7 +10,7 @@
 
 ### 배포
 
-Apache2 웹 서버를 사용하여 개인 서버에서 배포 하였으며, 도메인은 [jaeyonging.com](http://jaeyonging.com) 입니다.
+Apache2 웹 서버를 사용하여 개인 서버에서 배포 하였으며, 도메인은 [jaeyonging.com](https://blog.jaeyonging.com) 입니다.
 
 ### 환경 변수
 
