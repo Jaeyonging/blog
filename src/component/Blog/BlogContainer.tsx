@@ -17,7 +17,7 @@ const BlogContainer = () => {
     return (
         <>
             {data && (
-                <div className='flex flex-col gap-2 p-2'>
+                <div className='flex flex-col gap-2 p-2 max-w-[768px] mx-auto w-full'>
                     <ContentHeader title={data.title} view={data.view} date={data.created_at} />
                     <ContentBody content={data.content} />
                     <ContentLikesComments like={data.likes} comment={data.comment_count} />

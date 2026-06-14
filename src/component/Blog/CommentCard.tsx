@@ -4,19 +4,26 @@ interface Props {
   comment: string;
   date: string;
   nickname?: string;
-  imgurl?: string;
 }
 
-const CommentCard = ({ comment, nickname = 'Guest', date, imgurl = 'https://picsum.photos/200/150' }: Props) => {
+// 닉네임 첫 글자로 만드는 이니셜 아바타 색상 (닉네임마다 일관되게)
+const COLORS = ['bg-rose-400', 'bg-amber-400', 'bg-emerald-400', 'bg-sky-400', 'bg-indigo-400', 'bg-fuchsia-400']
+
+const CommentCard = ({ comment, nickname, date }: Props) => {
+  const name = nickname || 'Guest'
+  const color = COLORS[name.charCodeAt(0) % COLORS.length]
+
   return (
-    <div className='flex items-center border-[1px] border-gray-200 rounded-md p-2 relative'>
-      <img src={imgurl} alt='comment' className='w-10 h-10 rounded-full' />
-      <div className='flex flex-col gap-2 w-full pl-[20px]'>
-        <span>{comment}</span>
-        <div className='flex justify-between'>
-          <span className='text-gray-500'>{nickname? nickname : 'Guest'}</span>
-          <span className='text-gray-500'>{date}</span>
+    <div className='flex gap-3 border border-gray-200/40 rounded-lg p-3'>
+      <div className={`flex shrink-0 w-9 h-9 rounded-full items-center justify-center text-white text-sm font-bold ${color}`}>
+        {name.charAt(0).toUpperCase()}
+      </div>
+      <div className='flex flex-col gap-1 min-w-0 flex-1'>
+        <div className='flex items-center justify-between gap-2'>
+          <span className='text-sm font-semibold text-gray-100'>{name}</span>
+          <span className='text-xs text-gray-400 shrink-0'>{date}</span>
         </div>
+        <span className='text-sm text-gray-200 break-words whitespace-pre-wrap'>{comment}</span>
       </div>
     </div>
   )
