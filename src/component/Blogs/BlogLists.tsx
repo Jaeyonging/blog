@@ -10,6 +10,7 @@ const BlogLists = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const filter = searchParams.get('filter') || 'recent';
     const tag = searchParams.get('tag') || 'all';
+    const query = (searchParams.get('q') || '').toLowerCase();
     const selectedMode = searchParams.get('mode') || 'card';
 
     const handleModeChange = (mode: string) => {
@@ -26,6 +27,14 @@ const BlogLists = () => {
         if (tag !== 'all') {
             filteredData = filteredData.filter((blog) =>
                 Array.isArray(blog.tags) && blog.tags.includes(tag)
+            );
+        }
+
+        if (query) {
+            filteredData = filteredData.filter((blog) =>
+                (blog.title || '').toLowerCase().includes(query) ||
+                (blog.descr || '').toLowerCase().includes(query) ||
+                (Array.isArray(blog.tags) && blog.tags.some((t: string) => t.toLowerCase().includes(query)))
             );
         }
 
@@ -56,23 +65,24 @@ const BlogLists = () => {
             </div>
 
             {isBlogsLoading ? (
-                <div className='flex flex-col flex-wrap gap-2 lg:flex-row items-center'>
+                <div className='grid gap-2 justify-center sm:justify-items-stretch grid-cols-[repeat(auto-fill,250px)] sm:grid-cols-1'>
                     {Array.from({ length: 5 }).map((_, index) => (
-                        <div className='w-full lg:w-[250px]' key={index}>
+                        <div className='w-full sm:w-full' key={index}>
                             <SkeletonBlogCard key={index} width='100%' height='280px' />
                         </div>
                     ))}
                 </div>
             )
                 : (
-                    <div className='grid grid-cols-4 gap-2 sm:grid-cols-1'>
+                    <div className='grid gap-2 justify-center sm:justify-items-stretch grid-cols-[repeat(auto-fill,250px)] sm:grid-cols-1'>
                         {filteredAndSortedData.length > 0 && filteredAndSortedData.map((blog: any) => (
-                            <div className='w-full lg:w-[250px]' key={blog.id}>
+                            <div className='w-full' key={blog.id}>
                                 <BlogCard
                                     key={blog.id}
                                     blogData={blog}
                                     mode={selectedMode}
                                     width="100%"
+                                    highlight={query}
                                 />
                             </div>
                         ))}
