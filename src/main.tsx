@@ -4,6 +4,7 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import GlobalErrorBoundary from "./boundary/GlobalErrorBoundary";
+import "./util/axiosAuth";
 
 const queryClient = new QueryClient({
   defaultOptions: {

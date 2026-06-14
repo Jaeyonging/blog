@@ -2,6 +2,7 @@ import React from 'react'
 import { doLogin } from '../../api/user/user'
 import { useNavigate } from 'react-router-dom'
 import { useAdminStore } from '../../store/data'
+import { setCookie } from '../../util/cookies'
 
 interface Props{
     email: string
@@ -14,6 +15,7 @@ const LoginButton = ({email, password}: Props) => {
     const handleLogin = () => {
         doLogin(email, password).then((res) => {
             if(res.result){
+                setCookie('token', res.token)
                 setAdmin(res.user.id)
                 navigate('/admin')
             }
