@@ -18,6 +18,9 @@ export default defineConfig({
   },
 
   build: {
+    // 서버(app.js)가 서빙하는 blog-server/dist 로 바로 빌드한다.
+    outDir: '../dist',
+    emptyOutDir: true,
     rollupOptions: {
       output: {
         manualChunks(id) {
