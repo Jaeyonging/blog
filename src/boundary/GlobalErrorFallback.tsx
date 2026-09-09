@@ -1,22 +1,12 @@
 import React from "react";
-import Lottie from "react-lottie";
-import errorAnimation from '../lotties/error.json';
-
-const defaultOptions = {
-  loop: true,
-  autoplay: true,
-  animationData: errorAnimation,
-  rendererSettings: {
-    preserveAspectRatio: 'xMidYMid slice',
-  },
-};
+import LazyLottie from "../component/Common/LazyLottie";
 
 export const GlobalErrorFallback = ({ error, resetErrorBoundary }: { error: Error; resetErrorBoundary: () => void; }) => {
   const statusCode = (error as any)?.response?.status || null;
   console.log(error.message)
   return (
     <div role="alert" className="flex flex-col items-center justify-center w-[100vw] h-[100vh] p-2">
-      <Lottie options={defaultOptions} width={'100%'} height={'auto'} />
+      <LazyLottie name="error" style={{ width: '100%', height: 'auto' }} />
       {error.message != 'Network Error' ? (
         <>
           <span className="text-white  text-center">데이터를 불러오는데 에러가 발생하였습니다. </span>

@@ -42,8 +42,12 @@ export const addLike = async (bid: string, uid: string) => {
   return response.data;
 }
 
-const addComment = async (bid: string, content: string, uid: string) => {
-  const response = await axios.post(`${API_URL}/addComment`, { bid, content, uid });
+// 로그인(GitHub) 사용자는 token을 Authorization 헤더로, 익명은 password를 함께 보낸다.
+const authConfig = (token?: string) =>
+  token ? { headers: { Authorization: `Bearer ${token}` } } : undefined;
+
+const addComment = async (bid: string, content: string, uid: string, password?: string, token?: string) => {
+  const response = await axios.post(`${API_URL}/addComment`, { bid, content, uid, password }, authConfig(token));
   return response.data;
 }
 
@@ -51,7 +55,7 @@ export const useAddComment = () => {
   const queryClient = useQueryClient();
 
   return useMutation(
-    ({ bid, content, uid }: any) => addComment(bid, content, uid),
+    ({ bid, content, uid, password, token }: any) => addComment(bid, content, uid, password, token),
     {
       onSuccess: () => {
         queryClient.invalidateQueries('getBoardById');
@@ -109,13 +113,13 @@ export const deleteProjectById = async(pid: string) => {
   return response.data;
 }
 
-export const deleteComment = async(id: string) => {
-  const response = await axios.post(`${API_URL}/deleteComment`, {id});
+export const deleteComment = async(id: string, password?: string, token?: string) => {
+  const response = await axios.post(`${API_URL}/deleteComment`, {id, password}, authConfig(token));
   return response.data;
 }
 
-export const updateComment = async(id: string, content: string) => {
-  const response = await axios.post(`${API_URL}/updateComment`, {id, content});
+export const updateComment = async(id: string, content: string, password?: string, token?: string) => {
+  const response = await axios.post(`${API_URL}/updateComment`, {id, content, password}, authConfig(token));
   return response.data;
 }
 

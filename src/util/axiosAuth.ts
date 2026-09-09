@@ -4,7 +4,8 @@ import { getCookie, removeCookie } from './cookies';
 // 모든 요청에 JWT 토큰을 Authorization 헤더로 첨부한다.
 axios.interceptors.request.use((config) => {
     const token = getCookie('token');
-    if (token) {
+    // 요청에서 이미 Authorization 을 지정했으면(예: GitHub 댓글 토큰) 덮어쓰지 않는다.
+    if (token && !config.headers?.Authorization) {
         config.headers = config.headers || {};
         config.headers.Authorization = `Bearer ${token}`;
     }

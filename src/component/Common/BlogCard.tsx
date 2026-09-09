@@ -51,7 +51,15 @@ const BlogCard = ({ blogData, mode = 'card', width, height, highlight = '' }: Pr
                 <div className='flex w-full aspect-[5/3] border-2 border-[#ffffff33] rounded-md overflow-hidden'>
                     {
                         blogData.files && blogData.files.length > 0 && blogData.files[0].path ? (
-                            <img src={`${API_URL}/${blogData.files[0].path}`} alt={blogData.title} className='object-cover w-full h-full' />
+                            // 카드는 250px 폭이다. 원본(2MB짜리도 있다)을 그대로 받지 말고
+                            // 서버에 리사이즈된 webp 를 요청한다(레티나 대비 500px).
+                            <img
+                                src={`${API_URL}/${blogData.files[0].path}?w=500`}
+                                alt={blogData.title}
+                                className='object-cover w-full h-full'
+                                loading='lazy'
+                                decoding='async'
+                            />
                         ) : (
                             <div className='flex justify-center items-center w-full h-full'>
                                 <span className='text-[12px] text-gray-300'>이미지가 없습니다.</span>

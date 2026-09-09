@@ -1,8 +1,7 @@
 import React from 'react';
-import Lottie from 'react-lottie';
+import LazyLottie from '../Common/LazyLottie';
 import IconCard from './IconCard';
 import TimeLine from './TimeLine';
-import skillData from '../../lotties/skill.json'
 import ProjectCard from './ProjectCard';
 import MyInfoCard from './MyInfoCard';
 import GameCard from './GameCard';
@@ -13,20 +12,11 @@ import { API_URL } from '../../util/server';
 import { useFetchDataStore } from '../../store/data';
 
 const SkillCards = () => {
-  const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: skillData,
-    rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice',
-    },
-  };
-
   const { data } = useFetchDataStore();
 
   return (
     <div className='flex flex-col p-4 gap-2'>
-      <Lottie options={defaultOptions} width={200} />
+      <LazyLottie name="skill" style={{ width: 200 }} />
       <span className='text-[24px] font-bold'>My Info</span>
       <MyInfoCard />
       <span className='text-[24px] font-bold'>Skills</span>

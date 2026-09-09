@@ -1,23 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useNavigate } from 'react-router-dom';
-import Lottie from 'react-lottie';
-import animationData from '../../lotties/logo.json';
+import LazyLottie from './LazyLottie';
 
 
 const Topbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
     const [isScrolling, setIsScrolling] = useState(false);
-
-    const defaultOptions = {
-        loop: true,
-        autoplay: true,
-        animationData: animationData,
-        rendererSettings: {
-            preserveAspectRatio: 'xMidYMid slice',
-        },
-    };
 
     const handleOpen = () => {
         setIsOpen(!isOpen);
@@ -31,7 +21,7 @@ const Topbar = () => {
     return (
         <div className={`shadow-lg fixed top-0 left-0 w-full h-[60px] flex items-center justify-between px-4 text-[24px] bg-transparent z-20 transition-opacity duration-300 ease-in-out ${isScrolling ? 'opacity-0' : 'opacity-100'}`}>
             <div className="absolute top-0 left-0 w-full h-full z-0 pointer-events-none ">
-                <Lottie options={defaultOptions} height={'100%'} width={'100%'} />
+                <LazyLottie name="logo" style={{ width: '100%', height: '100%' }} />
             </div>
 
             <div className="flex items-center z-10 w-full justify-between">
@@ -44,6 +34,7 @@ const Topbar = () => {
                 <li className="p-2 hover:bg-gray-200 cursor-pointer" onClick={() => handleClick('/blogs')}>Blog</li>
                 <li className="p-2 hover:bg-gray-200 cursor-pointer" onClick={() => window.open('https://jaeyonging.com', '_blank')}>Portfolio</li>
                 <li className="p-2 hover:bg-gray-200 cursor-pointer" onClick={() => handleClick('/visitor')}>Visitor</li>
+                <li className="p-2 hover:bg-gray-200 cursor-pointer" onClick={() => handleClick('/privacy')}>Privacy</li>
             </div>
 
             {isOpen && (

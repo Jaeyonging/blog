@@ -25,6 +25,34 @@ const useUserStore = create<UserState>((set) => ({
     resetUser: () => set({ user: null }),
 }));
 
+// GitHub 로그인으로 댓글 쓰는 사용자. 새로고침해도 유지되도록 persist.
+interface GithubUser {
+    id: number;
+    nickname: string;
+    avatar_url?: string | null;
+    role?: number;
+}
+interface GithubUserState {
+    githubUser: GithubUser | null;
+    githubToken: string | null;
+    setGithub: (user: GithubUser, token: string) => void;
+    resetGithub: () => void;
+}
+
+const useGithubUserStore = create<GithubUserState>()(
+    persist(
+        (set) => ({
+            githubUser: null,
+            githubToken: null,
+            setGithub: (user, token) => set({ githubUser: user, githubToken: token }),
+            resetGithub: () => set({ githubUser: null, githubToken: null }),
+        }),
+        {
+            name: 'github-user-storage',
+        }
+    )
+);
+
 interface AdminState {
     admin: string;
     setAdmin: (newAdmin: string) => void;
@@ -109,4 +137,4 @@ const useVisitLogStore = create<VisitLogState>((set) => ({
     resetVisitLogs: () => set({ visitLogs: null }),
 }));
 
-export { useFetchDataStore, useUserStore, useBlogStore, useCodeStore, useVisitLogStore, useAdminStore };
+export { useFetchDataStore, useUserStore, useBlogStore, useCodeStore, useVisitLogStore, useAdminStore, useGithubUserStore };

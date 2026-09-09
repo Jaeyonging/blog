@@ -7,14 +7,18 @@ import Loading from '../lotties/Loading'
 import ApiErrorBoundary from '../boundary/ApiErrorBoundary'
 import { VisitBoardFetcher } from '../api/board/boardHooks'
 import VisitorContainer from '../component/Visitor/VisitorContainer'
+import PrivacyLink from '../component/Common/PrivacyLink'
 
 const Visitor = () => {
   return (
-    <ApiErrorBoundary>
-      <VisitBoardFetcher>
-        <VisitorContainer />
-      </VisitBoardFetcher>
-    </ApiErrorBoundary>
+    <>
+      <ApiErrorBoundary>
+        <VisitBoardFetcher>
+          <VisitorContainer />
+        </VisitBoardFetcher>
+      </ApiErrorBoundary>
+      <PrivacyLink />
+    </>
   )
 }
 

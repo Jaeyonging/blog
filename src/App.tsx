@@ -7,11 +7,13 @@ import Topbar from "./component/Common/Topbar";
 import BottomBar from "./component/Common/BottomBar";
 import ScrollToTop from "./component/Common/ScrollToTop";
 import SideMenu from "./component/Admin/SideMenu";
-import { useQuery, useMutation } from "react-query";
+import { useQuery } from "react-query";
 import Loading from "./lotties/Loading";
 import SplashLoading from "./lotties/SplashLoading";
 import AnimatedRoutes from "./util/AnimatedRoutes";
-import { checkIP, getIPaddress } from "./api/login/login";
+import CanonicalManager from "./util/CanonicalManager";
+import AdsGuard from "./util/AdsGuard";
+import { checkIP } from "./api/login/login";
 import { useUserStore } from "./store/data";
 
 function App() {
@@ -19,31 +21,26 @@ function App() {
   const location = useLocation();
   const { setUser } = useUserStore()
   const isAdmin = location.pathname.includes('/admin');
-  const { data: ipData, isLoading: isIPLoading, isError: isIPError, error: ipError } = useQuery(
-    ['getIPaddress'],
-    getIPaddress,
-    {
-      onSuccess: (res) => {
-        mutate(res.data.ip);
-      },
-    }
-  );
 
-  const { mutate, isLoading: isCheckLoading, isError: isCheckError, error: checkError } = useMutation(
-    (ip: string) => checkIP(ip),
+  // IP는 서버가 헤더에서 추출하므로 클라이언트는 /checkIP만 한 번 호출하면 된다.
+  const { isLoading: isCheckLoading } = useQuery(
+    ['checkIP'],
+    checkIP,
     {
       onSuccess: (res) => {
-        if (res.id) {
+        if (res?.id) {
           setUser(res)
         }
       },
     }
   );
 
-  if (isIPLoading || isCheckLoading) return <SplashLoading />;
+  if (isCheckLoading) return <SplashLoading />;
 
   return (
     <>
+      <CanonicalManager />
+      <AdsGuard />
       {!isAdmin ? <Topbar /> : <SideMenu />}
       <Suspense fallback={<SplashLoading />}>
         <ScrollToTop scrollContainerRef={scrollContainerRef} />

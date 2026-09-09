@@ -5,6 +5,7 @@ import BlogLists from '../component/Blogs/BlogLists'
 import Categories from '../component/Blogs/Categories'
 import Filters from '../component/Blogs/Filters'
 import SearchBar from '../component/Blogs/SearchBar'
+import PrivacyLink from '../component/Common/PrivacyLink'
 
 const Blogs = () => {
   return (
@@ -22,6 +23,7 @@ const Blogs = () => {
           <BlogLists />
         </BlogListsFetcher>
       </ApiErrorBoundary>
+      <PrivacyLink />
     </div>
   )
 }

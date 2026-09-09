@@ -8,16 +8,10 @@ export const checkMaster = async (id: string) => {
     return response.data;
 }
 
-export const checkIP = async(ip: string) => {
-    const response = await axios.post(`${API_URL}/checkIP`, {
-        ip
-    });
+// IP는 서버가 요청 헤더에서 직접 추출한다. 클라이언트는 빈 요청만 보낸다.
+export const checkIP = async() => {
+    const response = await axios.post(`${API_URL}/checkIP`);
     return response.data;}
-
-export const getIPaddress = async() => {
-    const response = axios.get('https://api.ipify.org?format=json')
-    return response
-}
 
 export const loginID = async(email: string, password: string) => {
     const response = await axios.post(`${API_URL}/loginID`, {

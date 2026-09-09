@@ -13,7 +13,16 @@ const ContentComment = ({ comment }: Props) => {
       <CommentInput/>
       {
         comment.map((item) => (
-          <CommentCard key={item.id} nickname={item.nickname} comment={item.content} date={item.created_at}/>
+          <CommentCard
+            key={item.id}
+            id={item.id}
+            uid={item.uid}
+            nickname={item.nickname}
+            avatar_url={item.avatar_url}
+            comment={item.content}
+            date={item.created_at}
+            hasPwd={!!item.has_pwd}
+          />
         ))
       }
     </div>
